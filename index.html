@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>InboxAI — Clean Your Gmail</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,67 +13,112 @@
         }
 
         body {
-            font-family: 'Outfit', sans-serif;
-            background: #08080e;
-            color: #f0f0f5;
-            overflow-x: hidden;
+            font-family: 'Space Grotesk', sans-serif;
+            background: #0d0d14;
+            color: #fff;
         }
 
-        /* ── UNIQUE HERO SECTION ── */
-        .hero-section {
-            min-height: 100vh;
+        /* ── NAV ── */
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
             display: flex;
             align-items: center;
-            position: relative;
-            overflow: hidden;
-            padding: 40px 0;
+            gap: 8px;
         }
 
-        /* ── SPLIT SCREEN LAYOUT ── */
-        .hero-wrapper {
+        .logo span {
+            color: #8b5cf6;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+        }
+
+        .nav-btn {
+            background: #8b5cf6;
+            color: #fff !important;
+            padding: 8px 22px;
+            border-radius: 100px;
+            font-weight: 600;
+        }
+
+        .nav-btn:hover {
+            background: #7c3aed;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+        }
+
+        /* ── HERO ── */
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 40px 60px;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 60px;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 40px;
-            width: 100%;
             align-items: center;
+            min-height: 70vh;
         }
 
-        /* ── LEFT SIDE ── */
-        .hero-left .tag {
+        .hero-left .label {
             display: inline-block;
-            background: #1a1a2e;
-            color: #a78bfa;
-            padding: 4px 16px;
-            border-radius: 50px;
+            background: rgba(139, 92, 246, 0.12);
+            color: #8b5cf6;
+            padding: 4px 14px;
+            border-radius: 100px;
             font-size: 12px;
             font-weight: 600;
-            letter-spacing: 0.5px;
             margin-bottom: 20px;
         }
 
         .hero-left h1 {
-            font-size: 56px;
-            font-weight: 900;
+            font-size: 52px;
+            font-weight: 800;
             line-height: 1.05;
             margin-bottom: 16px;
         }
 
-        .hero-left h1 .gradient {
-            background: linear-gradient(135deg, #a78bfa, #f472b6, #fb923c);
+        .hero-left h1 .highlight {
+            background: linear-gradient(135deg, #8b5cf6, #f472b6);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
 
         .hero-left p {
-            font-size: 18px;
-            color: #9ca3af;
+            font-size: 17px;
+            color: rgba(255,255,255,0.5);
             max-width: 440px;
             line-height: 1.7;
-            margin-bottom: 32px;
+            margin-bottom: 28px;
         }
 
         .btn-group {
@@ -83,228 +128,141 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #a78bfa, #7c3aed);
+            background: #8b5cf6;
             color: #fff;
-            padding: 14px 36px;
-            border-radius: 50px;
+            padding: 14px 32px;
+            border-radius: 100px;
             font-weight: 600;
             font-size: 15px;
             text-decoration: none;
-            transition: all 0.3s;
-            display: inline-block;
             border: none;
             cursor: pointer;
-            font-family: 'Outfit', sans-serif;
-            box-shadow: 0 4px 30px rgba(124, 58, 237, 0.3);
+            transition: all 0.3s;
+            font-family: 'Space Grotesk', sans-serif;
         }
 
         .btn-primary:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 8px 50px rgba(124, 58, 237, 0.4);
+            background: #7c3aed;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(139, 92, 246, 0.3);
         }
 
-        .btn-outline {
-            background: transparent;
+        .btn-secondary {
+            background: rgba(255,255,255,0.04);
             color: #fff;
-            padding: 14px 36px;
-            border-radius: 50px;
+            padding: 14px 32px;
+            border-radius: 100px;
             font-weight: 600;
             font-size: 15px;
             text-decoration: none;
-            border: 1px solid #2a2a3e;
-            transition: all 0.3s;
-            display: inline-block;
+            border: 1px solid rgba(255,255,255,0.08);
             cursor: pointer;
-            font-family: 'Outfit', sans-serif;
+            transition: all 0.3s;
+            font-family: 'Space Grotesk', sans-serif;
         }
 
-        .btn-outline:hover {
-            border-color: #a78bfa;
-            color: #a78bfa;
-            transform: translateY(-3px);
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.08);
+            transform: translateY(-2px);
         }
 
-        /* ── RIGHT SIDE ── */
-        .hero-right {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
+        /* ── MOCKUP ── */
+        .mockup {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 20px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
         }
 
-        .phone-mockup {
-            background: #12121c;
-            border: 1px solid #1e1e2e;
-            border-radius: 28px;
-            padding: 16px;
-            width: 100%;
-            max-width: 480px;
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6), 0 0 100px rgba(124, 58, 237, 0.05);
-            position: relative;
-        }
-
-        .phone-mockup::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            border-radius: 30px;
-            background: linear-gradient(135deg, #a78bfa, #f472b6, transparent, transparent);
-            z-index: -1;
-            opacity: 0.3;
-        }
-
-        .phone-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 4px 16px;
-            border-bottom: 1px solid #1a1a2a;
-        }
-
-        .phone-header span:first-child {
-            font-size: 12px;
-            color: #6b7280;
-            font-weight: 500;
-        }
-
-        .phone-header span:last-child {
-            font-size: 12px;
-            color: #6b7280;
-        }
-
-        .phone-body {
-            padding-top: 16px;
-        }
-
-        .phone-row {
+        .mockup-header {
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 12px 14px;
-            border-radius: 12px;
-            margin-bottom: 8px;
-            background: #161622;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            margin-bottom: 16px;
+        }
+
+        .mockup-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .mockup-dots span {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .mockup-dots .red { background: #f87171; }
+        .mockup-dots .yellow { background: #fbbf24; }
+        .mockup-dots .green { background: #34d399; }
+
+        .mockup-title {
+            font-size: 12px;
+            color: rgba(255,255,255,0.2);
+        }
+
+        .mockup-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.02);
+            margin-bottom: 6px;
             transition: all 0.3s;
         }
 
-        .phone-row:hover {
-            background: #1c1c2e;
+        .mockup-row:hover {
+            background: rgba(255,255,255,0.04);
         }
 
-        .phone-row .badge {
+        .mockup-row .badge {
             padding: 2px 10px;
-            border-radius: 50px;
+            border-radius: 100px;
             font-size: 9px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
             flex-shrink: 0;
         }
 
         .badge-pink { background: rgba(244, 114, 182, 0.15); color: #f472b6; }
-        .badge-purple { background: rgba(167, 139, 250, 0.15); color: #a78bfa; }
+        .badge-purple { background: rgba(139, 92, 246, 0.15); color: #8b5cf6; }
         .badge-orange { background: rgba(251, 146, 60, 0.15); color: #fb923c; }
         .badge-green { background: rgba(52, 211, 153, 0.15); color: #34d399; }
 
-        .phone-row .text {
+        .mockup-row .text {
             font-size: 13px;
-            color: #d1d5db;
-        }
-
-        .phone-stats {
-            display: flex;
-            gap: 20px;
-            padding: 12px 4px 16px;
-            border-bottom: 1px solid #1a1a2a;
-            margin-bottom: 12px;
-        }
-
-        .phone-stats span {
-            font-size: 13px;
-            color: #6b7280;
-        }
-
-        .phone-stats span strong {
-            color: #f0f0f5;
-            font-weight: 600;
-        }
-
-        /* ── FLOATING DECORATIVE ELEMENTS ── */
-        .float-1 {
-            position: absolute;
-            top: 10%;
-            right: 5%;
-            font-size: 48px;
-            opacity: 0.1;
-            transform: rotate(15deg);
-        }
-
-        .float-2 {
-            position: absolute;
-            bottom: 15%;
-            left: 5%;
-            font-size: 64px;
-            opacity: 0.05;
-            transform: rotate(-10deg);
+            color: rgba(255,255,255,0.6);
         }
 
         @media (max-width: 768px) {
-            .hero-wrapper {
+            .hero {
                 grid-template-columns: 1fr;
-                padding: 0 20px;
+                padding: 40px 20px;
                 gap: 40px;
+                text-align: center;
             }
-
-            .hero-left h1 {
-                font-size: 36px;
-            }
-
-            .phone-mockup {
+            .hero-left p {
                 max-width: 100%;
             }
-
             .btn-group {
-                flex-direction: column;
-                width: 100%;
+                justify-content: center;
             }
-
-            .btn-primary, .btn-outline {
-                text-align: center;
+            .hero-left h1 {
+                font-size: 34px;
             }
         }
 
         /* ── FEATURES ── */
-        .features-section {
-            padding: 80px 0;
-            border-top: 1px solid #11111e;
-        }
-
-        .features-wrapper {
-            max-width: 1100px;
+        .features {
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 40px;
-        }
-
-        .features-header {
-            text-align: center;
-            margin-bottom: 48px;
-        }
-
-        .features-header .sub {
-            color: #a78bfa;
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .features-header h2 {
-            font-size: 36px;
-            font-weight: 700;
-            margin-top: 4px;
+            padding: 80px 40px;
+            border-top: 1px solid rgba(255,255,255,0.04);
         }
 
         .features-grid {
@@ -313,36 +271,34 @@
             gap: 20px;
         }
 
-        .feature-box {
-            background: #11111e;
-            border: 1px solid #1a1a2a;
-            border-radius: 16px;
-            padding: 28px 20px;
+        .feature {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.04);
+            border-radius: 14px;
+            padding: 24px;
             transition: all 0.3s;
-            text-align: center;
         }
 
-        .feature-box:hover {
-            border-color: #a78bfa;
+        .feature:hover {
+            border-color: rgba(139, 92, 246, 0.2);
             transform: translateY(-4px);
-            background: #151528;
         }
 
-        .feature-box .icon {
-            font-size: 32px;
-            margin-bottom: 12px;
+        .feature .icon {
+            font-size: 28px;
+            margin-bottom: 10px;
             display: block;
         }
 
-        .feature-box h3 {
-            font-size: 17px;
+        .feature h3 {
+            font-size: 16px;
             font-weight: 600;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
-        .feature-box p {
-            font-size: 14px;
-            color: #9ca3af;
+        .feature p {
+            font-size: 13px;
+            color: rgba(255,255,255,0.4);
             line-height: 1.6;
         }
 
@@ -356,133 +312,124 @@
             .features-grid {
                 grid-template-columns: 1fr;
             }
-            .features-wrapper {
-                padding: 0 20px;
-            }
         }
 
         /* ── PRICING ── */
-        .pricing-section {
-            padding: 80px 0;
-            border-top: 1px solid #11111e;
-        }
-
-        .pricing-wrapper {
-            max-width: 1100px;
+        .pricing {
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 40px;
+            padding: 80px 40px;
+            border-top: 1px solid rgba(255,255,255,0.04);
         }
 
         .pricing-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
+            gap: 20px;
         }
 
-        .pricing-card {
-            background: #11111e;
-            border: 1px solid #1a1a2a;
-            border-radius: 16px;
-            padding: 32px 24px;
+        .plan {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.04);
+            border-radius: 14px;
+            padding: 28px 24px;
             transition: all 0.3s;
             position: relative;
         }
 
-        .pricing-card:hover {
+        .plan:hover {
             transform: translateY(-4px);
         }
 
-        .pricing-card.popular {
-            border-color: #a78bfa;
-            background: #151528;
+        .plan.popular {
+            border-color: rgba(139, 92, 246, 0.3);
+            background: rgba(139, 92, 246, 0.04);
         }
 
-        .pricing-card .badge-pop {
+        .plan .pop-badge {
             position: absolute;
             top: -12px;
             left: 50%;
             transform: translateX(-50%);
-            background: linear-gradient(135deg, #a78bfa, #7c3aed);
+            background: #8b5cf6;
             color: #fff;
             padding: 4px 16px;
-            border-radius: 50px;
+            border-radius: 100px;
             font-size: 11px;
             font-weight: 600;
         }
 
-        .pricing-card h3 {
-            font-size: 18px;
-            margin-bottom: 4px;
+        .plan h3 {
+            font-size: 17px;
+            margin-bottom: 2px;
         }
 
-        .pricing-card .price {
-            font-size: 38px;
+        .plan .price {
+            font-size: 34px;
             font-weight: 700;
         }
 
-        .pricing-card .price span {
-            font-size: 14px;
+        .plan .price span {
+            font-size: 13px;
             font-weight: 400;
-            color: #6b7280;
+            color: rgba(255,255,255,0.3);
         }
 
-        .pricing-card .desc {
-            color: #9ca3af;
-            font-size: 14px;
-            margin: 4px 0 16px;
+        .plan .desc {
+            color: rgba(255,255,255,0.3);
+            font-size: 13px;
+            margin-bottom: 16px;
         }
 
-        .pricing-card ul {
+        .plan ul {
             list-style: none;
             margin: 16px 0 24px;
         }
 
-        .pricing-card ul li {
-            padding: 6px 0;
-            font-size: 14px;
-            color: #d1d5db;
+        .plan ul li {
+            padding: 4px 0;
+            font-size: 13px;
+            color: rgba(255,255,255,0.6);
         }
 
-        .pricing-card ul li::before {
+        .plan ul li::before {
             content: '✦ ';
-            color: #a78bfa;
+            color: #8b5cf6;
         }
 
-        .pricing-card .btn {
+        .plan .btn {
             width: 100%;
             text-align: center;
             display: block;
             padding: 12px;
-            border-radius: 50px;
+            border-radius: 100px;
             font-weight: 600;
             text-decoration: none;
-            font-family: 'Outfit', sans-serif;
             border: none;
             cursor: pointer;
             font-size: 14px;
+            font-family: 'Space Grotesk', sans-serif;
             transition: all 0.3s;
         }
 
-        .pricing-card .btn-primary {
-            background: linear-gradient(135deg, #a78bfa, #7c3aed);
+        .plan .btn-primary {
+            background: #8b5cf6;
             color: #fff;
-            box-shadow: 0 4px 20px rgba(124, 58, 237, 0.2);
         }
 
-        .pricing-card .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(124, 58, 237, 0.3);
+        .plan .btn-primary:hover {
+            background: #7c3aed;
         }
 
-        .pricing-card .btn-outline {
+        .plan .btn-outline {
             background: transparent;
             color: #fff;
-            border: 1px solid #2a2a3e;
+            border: 1px solid rgba(255,255,255,0.08);
         }
 
-        .pricing-card .btn-outline:hover {
-            border-color: #a78bfa;
-            color: #a78bfa;
+        .plan .btn-outline:hover {
+            border-color: #8b5cf6;
+            color: #8b5cf6;
         }
 
         @media (max-width: 768px) {
@@ -491,97 +438,45 @@
                 max-width: 400px;
                 margin: 0 auto;
             }
-            .pricing-wrapper {
-                padding: 0 20px;
-            }
         }
 
         /* ── FAQ ── */
-        .faq-section {
-            padding: 80px 0;
-            border-top: 1px solid #11111e;
-        }
-
-        .faq-wrapper {
+        .faq {
             max-width: 800px;
             margin: 0 auto;
-            padding: 0 40px;
-        }
-
-        .faq-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .faq-header .sub {
-            color: #a78bfa;
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .faq-header h2 {
-            font-size: 32px;
-            font-weight: 700;
-            margin-top: 4px;
+            padding: 80px 40px;
+            border-top: 1px solid rgba(255,255,255,0.04);
         }
 
         .faq-item {
-            background: #11111e;
-            border: 1px solid #1a1a2a;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.04);
             border-radius: 12px;
-            padding: 20px 24px;
-            margin-bottom: 12px;
-            transition: all 0.3s;
-        }
-
-        .faq-item:hover {
-            border-color: #2a2a4a;
+            padding: 18px 22px;
+            margin-bottom: 10px;
         }
 
         .faq-item h4 {
             font-size: 15px;
             font-weight: 600;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
 
         .faq-item p {
             font-size: 14px;
-            color: #9ca3af;
+            color: rgba(255,255,255,0.4);
             line-height: 1.6;
-        }
-
-        @media (max-width: 768px) {
-            .faq-wrapper {
-                padding: 0 20px;
-            }
         }
 
         /* ── FOOTER ── */
         footer {
-            border-top: 1px solid #11111e;
-            padding: 40px 0 24px;
-        }
-
-        .footer-wrapper {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 40px;
+            padding: 40px;
+            border-top: 1px solid rgba(255,255,255,0.04);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .footer-brand {
-            font-size: 20px;
-            font-weight: 700;
-        }
-
-        .footer-brand span {
-            color: #a78bfa;
         }
 
         .footer-links {
@@ -590,214 +485,227 @@
         }
 
         .footer-links a {
-            color: #6b7280;
+            color: rgba(255,255,255,0.3);
             text-decoration: none;
             font-size: 13px;
             transition: color 0.3s;
         }
 
         .footer-links a:hover {
-            color: #f0f0f5;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            color: #4b5563;
-            font-size: 12px;
-            padding-top: 20px;
-            border-top: 1px solid #11111e;
-            margin-top: 20px;
+            color: #fff;
         }
 
         @media (max-width: 768px) {
-            .footer-wrapper {
+            footer {
                 flex-direction: column;
+                gap: 16px;
                 text-align: center;
             }
-            .footer-links {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
+        }
+
+        /* ── SECTION TITLES ── */
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title .sub {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgba(255,255,255,0.2);
+        }
+
+        .section-title h2 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-top: 2px;
+        }
+
+        .section-title h2 span {
+            color: #8b5cf6;
         }
     </style>
 </head>
 <body>
 
-    <!-- ── HERO ── -->
-    <section class="hero-section">
-        <div class="hero-wrapper">
-            <!-- LEFT -->
-            <div class="hero-left">
-                <div class="tag">✦ AI-Powered</div>
-                <h1>Your inbox,<br /><span class="gradient">actually clean.</span></h1>
-                <p>Stop drowning in emails. InboxAI automatically sorts your Gmail into smart labels, catches phishing, and cleans up the clutter — so you can focus on what matters.</p>
-                <div class="btn-group">
-                    <a href="#" class="btn-primary">✦ Add to Chrome — Free</a>
-                    <a href="#" class="btn-outline">Learn More →</a>
-                </div>
-            </div>
+    <!-- ── NAV ── -->
+    <nav>
+        <div class="logo">✦ <span>InboxAI</span></div>
+        <div class="nav-links">
+            <a href="#">Features</a>
+            <a href="#">Pricing</a>
+            <a href="#">FAQ</a>
+            <a href="privacy.html">Privacy</a>
+            <a href="#" class="nav-btn" id="installBtn">Install</a>
+        </div>
+    </nav>
 
-            <!-- RIGHT -->
-            <div class="hero-right">
-                <div class="phone-mockup">
-                    <div class="phone-header">
-                        <span>InboxAI</span>
-                        <span>✦</span>
+    <!-- ── HERO ── -->
+    <section class="hero">
+        <div class="hero-left">
+            <div class="label">✦ AI-Powered</div>
+            <h1>Your inbox,<br /><span class="highlight">actually clean.</span></h1>
+            <p>Stop drowning in emails. InboxAI automatically sorts your Gmail into smart labels, catches phishing, and cleans up the clutter — so you can focus on what matters.</p>
+            <div class="btn-group">
+                <button class="btn-primary" id="installHeroBtn">✦ Add to Chrome</button>
+                <a href="#" class="btn-secondary">Learn More →</a>
+            </div>
+        </div>
+        <div class="hero-right">
+            <div class="mockup">
+                <div class="mockup-header">
+                    <div class="mockup-dots">
+                        <span class="red"></span>
+                        <span class="yellow"></span>
+                        <span class="green"></span>
                     </div>
-                    <div class="phone-body">
-                        <div class="phone-stats">
-                            <span>📊 <strong>25</strong> scanned</span>
-                            <span>🔥 <strong>45%</strong> clutter</span>
-                            <span>⚠️ <strong>3</strong> phishing</span>
-                        </div>
-                        <div class="phone-row">
-                            <span class="badge badge-pink">Promotion</span>
-                            <span class="text">50% off your next order</span>
-                        </div>
-                        <div class="phone-row">
-                            <span class="badge badge-purple">Newsletter</span>
-                            <span class="text">Weekly digest #42</span>
-                        </div>
-                        <div class="phone-row">
-                            <span class="badge badge-orange">Security</span>
-                            <span class="text">New login detected</span>
-                        </div>
-                        <div class="phone-row">
-                            <span class="badge badge-green">Finance</span>
-                            <span class="text">Your invoice is ready</span>
-                        </div>
-                    </div>
+                    <span class="mockup-title">InboxAI</span>
                 </div>
-                <div class="float-1">✦</div>
-                <div class="float-2">✦</div>
+                <div class="mockup-row">
+                    <span class="badge badge-pink">Promotion</span>
+                    <span class="text">50% off your next order</span>
+                </div>
+                <div class="mockup-row">
+                    <span class="badge badge-purple">Newsletter</span>
+                    <span class="text">Weekly digest #42</span>
+                </div>
+                <div class="mockup-row">
+                    <span class="badge badge-orange">Security</span>
+                    <span class="text">New login detected</span>
+                </div>
+                <div class="mockup-row">
+                    <span class="badge badge-green">Finance</span>
+                    <span class="text">Your invoice is ready</span>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- ── FEATURES ── -->
-    <section class="features-section">
-        <div class="features-wrapper">
-            <div class="features-header">
-                <div class="sub">Features</div>
-                <h2>What InboxAI does for you</h2>
+    <section class="features">
+        <div class="section-title">
+            <div class="sub">Features</div>
+            <h2>What <span>InboxAI</span> does for you</h2>
+        </div>
+        <div class="features-grid">
+            <div class="feature">
+                <span class="icon">🏷️</span>
+                <h3>Smart Labels</h3>
+                <p>Automatically categorizes emails into Promotions, Newsletters, Security, Finance, and more.</p>
             </div>
-            <div class="features-grid">
-                <div class="feature-box">
-                    <span class="icon">🏷️</span>
-                    <h3>Smart Labels</h3>
-                    <p>Automatically categorizes emails into Promotions, Newsletters, Security, Finance, and more.</p>
-                </div>
-                <div class="feature-box">
-                    <span class="icon">🧹</span>
-                    <h3>One-Click Cleanup</h3>
-                    <p>Archive hundreds of promotional emails instantly. Reclaim your inbox in seconds.</p>
-                </div>
-                <div class="feature-box">
-                    <span class="icon">🛡️</span>
-                    <h3>Phishing Detection</h3>
-                    <p>Identifies suspicious emails with clear explanations and confidence scores.</p>
-                </div>
-                <div class="feature-box">
-                    <span class="icon">📊</span>
-                    <h3>Inbox Analytics</h3>
-                    <p>See your clutter score, phishing count, and organization stats at a glance.</p>
-                </div>
+            <div class="feature">
+                <span class="icon">🧹</span>
+                <h3>One-Click Cleanup</h3>
+                <p>Archive hundreds of promotional emails instantly. Reclaim your inbox in seconds.</p>
+            </div>
+            <div class="feature">
+                <span class="icon">🛡️</span>
+                <h3>Phishing Detection</h3>
+                <p>Identifies suspicious emails with clear explanations and confidence scores.</p>
+            </div>
+            <div class="feature">
+                <span class="icon">📊</span>
+                <h3>Inbox Analytics</h3>
+                <p>See your clutter score, phishing count, and organization stats at a glance.</p>
             </div>
         </div>
     </section>
 
     <!-- ── PRICING ── -->
-    <section class="pricing-section">
-        <div class="pricing-wrapper">
-            <div class="features-header">
-                <div class="sub">Pricing</div>
-                <h2>Simple, fair pricing</h2>
+    <section class="pricing">
+        <div class="section-title">
+            <div class="sub">Pricing</div>
+            <h2>Simple, <span>fair</span> pricing</h2>
+        </div>
+        <div class="pricing-grid">
+            <div class="plan">
+                <h3>Free</h3>
+                <div class="price">₹0</div>
+                <div class="desc">For getting started</div>
+                <ul>
+                    <li>5 scans per day</li>
+                    <li>25 emails per scan</li>
+                    <li>Smart labels</li>
+                    <li>Basic phishing detection</li>
+                </ul>
+                <button class="btn btn-outline">Get Started</button>
             </div>
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <h3>Free</h3>
-                    <div class="price">₹0</div>
-                    <div class="desc">For getting started</div>
-                    <ul>
-                        <li>5 scans per day</li>
-                        <li>25 emails per scan</li>
-                        <li>Smart labels</li>
-                        <li>Basic phishing detection</li>
-                    </ul>
-                    <a href="#" class="btn btn-outline">Get Started</a>
-                </div>
-                <div class="pricing-card popular">
-                    <div class="badge-pop">⭐ Most Popular</div>
-                    <h3>Premium</h3>
-                    <div class="price">₹99 <span>/mo</span></div>
-                    <div class="desc">For power users</div>
-                    <ul>
-                        <li>Unlimited scans</li>
-                        <li>Unlimited emails</li>
-                        <li>Bulk cleanup (500+)</li>
-                        <li>Deep AI explanations</li>
-                        <li>Advanced analytics</li>
-                    </ul>
-                    <a href="#" class="btn btn-primary">Upgrade Now</a>
-                </div>
-                <div class="pricing-card">
-                    <h3>International</h3>
-                    <div class="price">$1.19 <span>/mo</span></div>
-                    <div class="desc">For users outside India</div>
-                    <ul>
-                        <li>All Premium features</li>
-                        <li>Global payment support</li>
-                    </ul>
-                    <a href="#" class="btn btn-outline">Upgrade Now</a>
-                </div>
+            <div class="plan popular">
+                <div class="pop-badge">⭐ Most Popular</div>
+                <h3>Premium</h3>
+                <div class="price">₹99 <span>/mo</span></div>
+                <div class="desc">For power users</div>
+                <ul>
+                    <li>Unlimited scans</li>
+                    <li>Unlimited emails</li>
+                    <li>Bulk cleanup (500+)</li>
+                    <li>Deep AI explanations</li>
+                    <li>Advanced analytics</li>
+                </ul>
+                <button class="btn btn-primary">Upgrade Now</button>
+            </div>
+            <div class="plan">
+                <h3>International</h3>
+                <div class="price">$1.19 <span>/mo</span></div>
+                <div class="desc">For users outside India</div>
+                <ul>
+                    <li>All Premium features</li>
+                    <li>Global payment support</li>
+                </ul>
+                <button class="btn btn-outline">Upgrade Now</button>
             </div>
         </div>
     </section>
 
     <!-- ── FAQ ── -->
-    <section class="faq-section">
-        <div class="faq-wrapper">
-            <div class="faq-header">
-                <div class="sub">FAQ</div>
-                <h2>Questions? We've got answers.</h2>
-            </div>
-            <div class="faq-item">
-                <h4>Is my data safe?</h4>
-                <p>Yes. We never store your emails. Processing happens in real-time. Your Gmail token is used only to fetch and classify emails.</p>
-            </div>
-            <div class="faq-item">
-                <h4>What's the free tier?</h4>
-                <p>5 scans per day with 25 emails per scan. Perfect to try it out. Upgrade to Premium for unlimited everything.</p>
-            </div>
-            <div class="faq-item">
-                <h4>How do I install?</h4>
-                <p>Click "Add to Chrome" on this page. It takes you to the Chrome Web Store where you can add it in one click.</p>
-            </div>
-            <div class="faq-item">
-                <h4>What payment methods?</h4>
-                <p>UPI (Google Pay, PhonePe), credit/debit cards, and netbanking. International users can pay via card.</p>
-            </div>
+    <section class="faq">
+        <div class="section-title">
+            <div class="sub">FAQ</div>
+            <h2>Questions? <span>We've got answers.</span></h2>
+        </div>
+        <div class="faq-item">
+            <h4>Is my data safe?</h4>
+            <p>Yes. We never store your emails. Processing happens in real-time. Your Gmail token is used only to fetch and classify emails.</p>
+        </div>
+        <div class="faq-item">
+            <h4>What's the free tier?</h4>
+            <p>5 scans per day with 25 emails per scan. Perfect to try it out. Upgrade to Premium for unlimited everything.</p>
+        </div>
+        <div class="faq-item">
+            <h4>How do I install?</h4>
+            <p>Click "Add to Chrome" on this page. It takes you to the Chrome Web Store where you can add it in one click.</p>
+        </div>
+        <div class="faq-item">
+            <h4>What payment methods?</h4>
+            <p>UPI (Google Pay, PhonePe), credit/debit cards, and netbanking. International users can pay via card.</p>
         </div>
     </section>
 
     <!-- ── FOOTER ── -->
     <footer>
-        <div class="footer-wrapper">
-            <div class="footer-brand">
-                ✦ <span>InboxAI</span>
-            </div>
-            <div class="footer-links">
-                <a href="#">Features</a>
-                <a href="#">Pricing</a>
-                <a href="#">FAQ</a>
-                <a href="privacy.html">Privacy</a>
-                <a href="terms.html">Terms</a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            © 2026 InboxAI. All rights reserved.
+        <div class="logo">✦ <span>InboxAI</span></div>
+        <div class="footer-links">
+            <a href="#">Features</a>
+            <a href="#">Pricing</a>
+            <a href="#">FAQ</a>
+            <a href="privacy.html">Privacy</a>
+            <a href="terms.html">Terms</a>
         </div>
     </footer>
+
+    <script>
+        // ── MAKE INSTALL BUTTONS WORK ──
+        document.querySelectorAll('#installBtn, #installHeroBtn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                // This will open the Chrome Web Store page when you publish
+                // For now, show a message
+                alert('🚀 InboxAI will be available on the Chrome Web Store soon!\n\nYou can still use the extension by loading it manually in developer mode.');
+            });
+        });
+    </script>
 
 </body>
 </html>
