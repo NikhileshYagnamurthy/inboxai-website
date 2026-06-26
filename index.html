@@ -520,10 +520,42 @@
         .section-title h2 span {
             color: #8b5cf6;
         }
+
+        /* Toast message */
+        .custom-toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1a1a2e;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            color: #fff;
+            padding: 16px 28px;
+            border-radius: 12px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 14px;
+            max-width: 420px;
+            text-align: center;
+            z-index: 9999;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+            animation: slideUp 0.4s ease;
+            white-space: pre-line;
+            line-height: 1.6;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; transform: translateX(-50%) translateY(10px); }
+        }
     </style>
 </head>
 <body>
 
+    <!-- ── NAV ── -->
     <nav>
         <div class="logo">✦ <span>InboxAI</span></div>
         <div class="nav-links">
@@ -531,10 +563,12 @@
             <a href="#" data-target="pricing">Pricing</a>
             <a href="#" data-target="faq">FAQ</a>
             <a href="privacy.html">Privacy</a>
+            <a href="terms.html">Terms</a>
             <a href="#" class="nav-btn" id="installNavBtn">Install</a>
         </div>
     </nav>
 
+    <!-- ── HERO ── -->
     <section class="hero">
         <div class="hero-left">
             <div class="label">✦ AI-Powered</div>
@@ -575,6 +609,7 @@
         </div>
     </section>
 
+    <!-- ── FEATURES ── -->
     <section class="features" id="features">
         <div class="section-title">
             <div class="sub">Features</div>
@@ -604,6 +639,7 @@
         </div>
     </section>
 
+    <!-- ── PRICING ── -->
     <section class="pricing" id="pricing">
         <div class="section-title">
             <div class="sub">Pricing</div>
@@ -649,6 +685,7 @@
         </div>
     </section>
 
+    <!-- ── FAQ ── -->
     <section class="faq" id="faq">
         <div class="section-title">
             <div class="sub">FAQ</div>
@@ -672,6 +709,7 @@
         </div>
     </section>
 
+    <!-- ── FOOTER ── -->
     <footer>
         <div class="logo">✦ <span>InboxAI</span></div>
         <div class="footer-links">
@@ -695,13 +733,35 @@
                 });
             });
 
-            // ── LEARN MORE BUTTON ──
+            // ── LEARN MORE BUTTON → GOES TO TERMS & PRIVACY ──
             document.getElementById('learnMoreBtn')?.addEventListener('click', function(e) {
                 e.preventDefault();
-                document.getElementById('features').scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+                // Open a popup with both Privacy and Terms
+                const win = window.open('', '_blank', 'width=600,height=500');
+                win.document.write(`
+                    <html>
+                    <head><title>InboxAI — Learn More</title>
+                    <style>
+                        body { font-family: 'Space Grotesk', sans-serif; background: #0d0d14; color: #fff; padding: 40px; max-width: 500px; margin: 0 auto; }
+                        h1 { font-size: 24px; margin-bottom: 8px; }
+                        p { color: rgba(255,255,255,0.5); line-height: 1.6; margin-bottom: 16px; }
+                        .links { display: flex; flex-direction: column; gap: 12px; margin-top: 24px; }
+                        .links a { background: rgba(139,92,246,0.1); border: 1px solid rgba(139,92,246,0.2); color: #8b5cf6; padding: 12px 20px; border-radius: 10px; text-decoration: none; text-align: center; transition: all 0.3s; }
+                        .links a:hover { background: rgba(139,92,246,0.2); }
+                    </style>
+                    </head>
+                    <body>
+                        <h1>✦ Learn More</h1>
+                        <p>InboxAI is a smart Gmail organizer that uses AI to label, sort, and clean your inbox automatically.</p>
+                        <div class="links">
+                            <a href="privacy.html" target="_blank">📄 Privacy Policy</a>
+                            <a href="terms.html" target="_blank">📋 Terms of Service</a>
+                            <a href="#" onclick="window.close()" style="background:transparent;border:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.3);">Close</a>
+                        </div>
+                    </body>
+                    </html>
+                `);
+                win.document.close();
             });
 
             // ── NAVIGATION LINKS ──
@@ -731,40 +791,6 @@
 
                 const toast = document.createElement('div');
                 toast.className = 'custom-toast';
-                toast.style.cssText = `
-                    position: fixed;
-                    bottom: 30px;
-                    left: 50%;
-                    transform: translateX(-50%);
-                    background: #1a1a2e;
-                    border: 1px solid rgba(139, 92, 246, 0.3);
-                    color: #fff;
-                    padding: 16px 28px;
-                    border-radius: 12px;
-                    font-family: 'Space Grotesk', sans-serif;
-                    font-size: 14px;
-                    max-width: 420px;
-                    text-align: center;
-                    z-index: 9999;
-                    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
-                    animation: slideUp 0.4s ease;
-                    white-space: pre-line;
-                    line-height: 1.6;
-                `;
-
-                const style = document.createElement('style');
-                style.textContent = `
-                    @keyframes slideUp {
-                        from { opacity: 0; transform: translateX(-50%) translateY(20px); }
-                        to { opacity: 1; transform: translateX(-50%) translateY(0); }
-                    }
-                    @keyframes fadeOut {
-                        from { opacity: 1; }
-                        to { opacity: 0; transform: translateX(-50%) translateY(10px); }
-                    }
-                `;
-                document.head.appendChild(style);
-
                 toast.textContent = message;
                 document.body.appendChild(toast);
 
@@ -776,6 +802,5 @@
 
         });
     </script>
-
 </body>
 </html>
