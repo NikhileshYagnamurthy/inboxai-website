@@ -18,7 +18,6 @@
             color: #fff;
         }
 
-        /* ── NAV ── */
         nav {
             max-width: 1200px;
             margin: 0 auto;
@@ -53,6 +52,7 @@
             font-size: 14px;
             font-weight: 500;
             transition: color 0.3s;
+            cursor: pointer;
         }
 
         .nav-links a:hover {
@@ -77,7 +77,6 @@
             }
         }
 
-        /* ── HERO ── */
         .hero {
             max-width: 1200px;
             margin: 0 auto;
@@ -166,7 +165,6 @@
             transform: translateY(-2px);
         }
 
-        /* ── MOCKUP ── */
         .mockup {
             background: rgba(255,255,255,0.02);
             border: 1px solid rgba(255,255,255,0.06);
@@ -257,7 +255,6 @@
             }
         }
 
-        /* ── FEATURES ── */
         .features {
             max-width: 1200px;
             margin: 0 auto;
@@ -314,7 +311,6 @@
             }
         }
 
-        /* ── PRICING ── */
         .pricing {
             max-width: 1200px;
             margin: 0 auto;
@@ -440,7 +436,6 @@
             }
         }
 
-        /* ── FAQ ── */
         .faq {
             max-width: 800px;
             margin: 0 auto;
@@ -468,7 +463,6 @@
             line-height: 1.6;
         }
 
-        /* ── FOOTER ── */
         footer {
             max-width: 1200px;
             margin: 0 auto;
@@ -489,6 +483,7 @@
             text-decoration: none;
             font-size: 13px;
             transition: color 0.3s;
+            cursor: pointer;
         }
 
         .footer-links a:hover {
@@ -503,7 +498,6 @@
             }
         }
 
-        /* ── SECTION TITLES ── */
         .section-title {
             text-align: center;
             margin-bottom: 40px;
@@ -530,19 +524,17 @@
 </head>
 <body>
 
-    <!-- ── NAV ── -->
     <nav>
         <div class="logo">✦ <span>InboxAI</span></div>
         <div class="nav-links">
-            <a href="#">Features</a>
-            <a href="#">Pricing</a>
-            <a href="#">FAQ</a>
+            <a href="#" data-target="features">Features</a>
+            <a href="#" data-target="pricing">Pricing</a>
+            <a href="#" data-target="faq">FAQ</a>
             <a href="privacy.html">Privacy</a>
-            <a href="#" class="nav-btn" id="installBtn">Install</a>
+            <a href="#" class="nav-btn" id="installNavBtn">Install</a>
         </div>
     </nav>
 
-    <!-- ── HERO ── -->
     <section class="hero">
         <div class="hero-left">
             <div class="label">✦ AI-Powered</div>
@@ -550,7 +542,7 @@
             <p>Stop drowning in emails. InboxAI automatically sorts your Gmail into smart labels, catches phishing, and cleans up the clutter — so you can focus on what matters.</p>
             <div class="btn-group">
                 <button class="btn-primary" id="installHeroBtn">✦ Add to Chrome</button>
-                <a href="#" class="btn-secondary">Learn More →</a>
+                <button class="btn-secondary" id="learnMoreBtn">Learn More →</button>
             </div>
         </div>
         <div class="hero-right">
@@ -583,8 +575,7 @@
         </div>
     </section>
 
-    <!-- ── FEATURES ── -->
-    <section class="features">
+    <section class="features" id="features">
         <div class="section-title">
             <div class="sub">Features</div>
             <h2>What <span>InboxAI</span> does for you</h2>
@@ -613,8 +604,7 @@
         </div>
     </section>
 
-    <!-- ── PRICING ── -->
-    <section class="pricing">
+    <section class="pricing" id="pricing">
         <div class="section-title">
             <div class="sub">Pricing</div>
             <h2>Simple, <span>fair</span> pricing</h2>
@@ -659,8 +649,7 @@
         </div>
     </section>
 
-    <!-- ── FAQ ── -->
-    <section class="faq">
+    <section class="faq" id="faq">
         <div class="section-title">
             <div class="sub">FAQ</div>
             <h2>Questions? <span>We've got answers.</span></h2>
@@ -683,27 +672,108 @@
         </div>
     </section>
 
-    <!-- ── FOOTER ── -->
     <footer>
         <div class="logo">✦ <span>InboxAI</span></div>
         <div class="footer-links">
-            <a href="#">Features</a>
-            <a href="#">Pricing</a>
-            <a href="#">FAQ</a>
+            <a href="#" data-target="features">Features</a>
+            <a href="#" data-target="pricing">Pricing</a>
+            <a href="#" data-target="faq">FAQ</a>
             <a href="privacy.html">Privacy</a>
             <a href="terms.html">Terms</a>
         </div>
     </footer>
 
     <script>
-        // ── MAKE INSTALL BUTTONS WORK ──
-        document.querySelectorAll('#installBtn, #installHeroBtn').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.preventDefault();
-                // This will open the Chrome Web Store page when you publish
-                // For now, show a message
-                alert('🚀 InboxAI will be available on the Chrome Web Store soon!\n\nYou can still use the extension by loading it manually in developer mode.');
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // ── INSTALL BUTTONS ──
+            const installButtons = document.querySelectorAll('#installHeroBtn, #installNavBtn');
+            installButtons.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showToast('🚀 InboxAI is coming to the Chrome Web Store soon!\n\n📦 For now, you can load it manually in Developer Mode.');
+                });
             });
+
+            // ── LEARN MORE BUTTON ──
+            document.getElementById('learnMoreBtn')?.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.getElementById('features').scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+
+            // ── NAVIGATION LINKS ──
+            document.querySelectorAll('[data-target]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = this.dataset.target;
+                    const section = document.getElementById(target);
+                    if (section) {
+                        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+
+            // ── PLAN BUTTONS ──
+            document.querySelectorAll('.plan .btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showToast('✨ Premium features will be available soon!\n\n💳 Payments are coming with Razorpay integration.');
+                });
+            });
+
+            // ── TOAST NOTIFICATION ──
+            function showToast(message) {
+                const oldToast = document.querySelector('.custom-toast');
+                if (oldToast) oldToast.remove();
+
+                const toast = document.createElement('div');
+                toast.className = 'custom-toast';
+                toast.style.cssText = `
+                    position: fixed;
+                    bottom: 30px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: #1a1a2e;
+                    border: 1px solid rgba(139, 92, 246, 0.3);
+                    color: #fff;
+                    padding: 16px 28px;
+                    border-radius: 12px;
+                    font-family: 'Space Grotesk', sans-serif;
+                    font-size: 14px;
+                    max-width: 420px;
+                    text-align: center;
+                    z-index: 9999;
+                    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+                    animation: slideUp 0.4s ease;
+                    white-space: pre-line;
+                    line-height: 1.6;
+                `;
+
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes slideUp {
+                        from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+                        to { opacity: 1; transform: translateX(-50%) translateY(0); }
+                    }
+                    @keyframes fadeOut {
+                        from { opacity: 1; }
+                        to { opacity: 0; transform: translateX(-50%) translateY(10px); }
+                    }
+                `;
+                document.head.appendChild(style);
+
+                toast.textContent = message;
+                document.body.appendChild(toast);
+
+                setTimeout(() => {
+                    toast.style.animation = 'fadeOut 0.4s ease forwards';
+                    setTimeout(() => toast.remove(), 400);
+                }, 4000);
+            }
+
         });
     </script>
 
