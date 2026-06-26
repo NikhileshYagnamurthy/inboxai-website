@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>InboxAI — Clean Your Gmail</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -14,9 +14,9 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #faf6f0;
+            background: #fcfaf8;
             color: #1a1410;
-            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
 
         .container {
@@ -27,9 +27,9 @@
 
         /* ── NAV ── */
         nav {
-            padding: 18px 0;
-            border-bottom: 1px solid #e8e0d8;
-            background: #faf6f0;
+            padding: 20px 0;
+            border-bottom: 1px solid #f0ece8;
+            background: #fcfaf8;
             position: sticky;
             top: 0;
             z-index: 100;
@@ -45,7 +45,7 @@
         }
 
         .logo {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 800;
             color: #1a1410;
             cursor: pointer;
@@ -61,7 +61,7 @@
         .nav-links {
             display: flex;
             align-items: center;
-            gap: 28px;
+            gap: 32px;
         }
 
         .nav-links a {
@@ -82,15 +82,16 @@
         }
 
         .nav-btn {
-            background: #c4956a;
+            background: #1a1410;
             color: #fff !important;
             padding: 8px 22px;
             border-radius: 100px;
             font-weight: 600;
+            font-size: 13px;
         }
 
         .nav-btn:hover {
-            background: #b0855a;
+            background: #2a2420;
             color: #fff !important;
         }
 
@@ -102,7 +103,7 @@
 
         /* ── HERO ── */
         .hero {
-            padding: 80px 0 60px;
+            padding: 80px 0 64px;
         }
 
         .hero-grid {
@@ -114,7 +115,7 @@
 
         .hero-left .tag {
             display: inline-block;
-            background: rgba(196, 149, 106, 0.12);
+            background: rgba(196, 149, 106, 0.1);
             color: #c4956a;
             padding: 4px 14px;
             border-radius: 100px;
@@ -129,6 +130,7 @@
             line-height: 1.05;
             margin-bottom: 16px;
             color: #1a1410;
+            letter-spacing: -0.02em;
         }
 
         .hero-left h1 .highlight {
@@ -150,7 +152,7 @@
         }
 
         .btn-primary {
-            background: #c4956a;
+            background: #1a1410;
             color: #fff;
             padding: 14px 32px;
             border-radius: 100px;
@@ -163,7 +165,7 @@
         }
 
         .btn-primary:hover {
-            background: #b0855a;
+            background: #2a2420;
             transform: translateY(-2px);
         }
 
@@ -174,7 +176,7 @@
             border-radius: 100px;
             font-weight: 600;
             font-size: 15px;
-            border: 1px solid #d4c8bc;
+            border: 1px solid #e0d8d0;
             cursor: pointer;
             transition: all 0.2s;
             font-family: inherit;
@@ -189,10 +191,10 @@
         /* ── MOCKUP ── */
         .mockup {
             background: #ffffff;
-            border: 1px solid #e8e0d8;
+            border: 1px solid #f0ece8;
             border-radius: 16px;
             padding: 20px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.03);
         }
 
         .mockup-header {
@@ -200,7 +202,7 @@
             align-items: center;
             gap: 12px;
             padding-bottom: 14px;
-            border-bottom: 1px solid #f0e8e0;
+            border-bottom: 1px solid #f0ece8;
             margin-bottom: 14px;
         }
 
@@ -232,13 +234,13 @@
             gap: 12px;
             padding: 10px 14px;
             border-radius: 8px;
-            background: #faf6f0;
+            background: #fcfaf8;
             margin-bottom: 6px;
             transition: all 0.2s;
         }
 
         .mockup-row:hover {
-            background: #f0e8e0;
+            background: #f5f0ea;
         }
 
         .mockup-row .badge {
@@ -279,7 +281,7 @@
         /* ── FEATURES ── */
         .features {
             padding: 80px 0;
-            border-top: 1px solid #e8e0d8;
+            border-top: 1px solid #f0ece8;
         }
 
         .features-grid {
@@ -290,7 +292,7 @@
 
         .feature {
             background: #ffffff;
-            border: 1px solid #e8e0d8;
+            border: 1px solid #f0ece8;
             border-radius: 12px;
             padding: 24px;
             transition: all 0.2s;
@@ -335,7 +337,7 @@
         /* ── PRICING ── */
         .pricing {
             padding: 80px 0;
-            border-top: 1px solid #e8e0d8;
+            border-top: 1px solid #f0ece8;
         }
 
         .pricing-grid {
@@ -346,8 +348,8 @@
 
         .plan {
             background: #ffffff;
-            border: 1px solid #e8e0d8;
-            border-radius: 14px;
+            border: 1px solid #f0ece8;
+            border-radius: 12px;
             padding: 28px 24px;
             transition: all 0.2s;
             position: relative;
@@ -360,7 +362,7 @@
 
         .plan.popular {
             border-color: #c4956a;
-            background: #fefcf9;
+            background: #fcfaf8;
         }
 
         .plan .pop-badge {
@@ -368,7 +370,7 @@
             top: -12px;
             left: 50%;
             transform: translateX(-50%);
-            background: #c4956a;
+            background: #1a1410;
             color: #fff;
             padding: 4px 16px;
             border-radius: 100px;
@@ -431,18 +433,18 @@
         }
 
         .plan .btn-primary {
-            background: #c4956a;
+            background: #1a1410;
             color: #fff;
         }
 
         .plan .btn-primary:hover {
-            background: #b0855a;
+            background: #2a2420;
         }
 
         .plan .btn-outline {
             background: transparent;
             color: #1a1410;
-            border: 1px solid #d4c8bc;
+            border: 1px solid #e0d8d0;
         }
 
         .plan .btn-outline:hover {
@@ -461,7 +463,7 @@
         /* ── FAQ ── */
         .faq {
             padding: 80px 0;
-            border-top: 1px solid #e8e0d8;
+            border-top: 1px solid #f0ece8;
         }
 
         .faq-grid {
@@ -472,7 +474,7 @@
 
         .faq-item {
             background: #ffffff;
-            border: 1px solid #e8e0d8;
+            border: 1px solid #f0ece8;
             border-radius: 12px;
             padding: 18px 22px;
         }
@@ -496,10 +498,10 @@
             }
         }
 
-        /* ── LEGAL PAGES (Privacy & Terms) ── */
+        /* ── LEGAL PAGES ── */
         .legal-page {
             padding: 60px 0 80px;
-            border-top: 1px solid #e8e0d8;
+            border-top: 1px solid #f0ece8;
             display: none;
         }
 
@@ -509,7 +511,7 @@
 
         .legal-page .back-btn {
             background: transparent;
-            border: 1px solid #d4c8bc;
+            border: 1px solid #e0d8d0;
             color: #1a1410;
             padding: 8px 20px;
             border-radius: 100px;
@@ -527,7 +529,7 @@
         }
 
         .legal-page h1 {
-            font-size: 36px;
+            font-size: 32px;
             font-weight: 800;
             margin-bottom: 4px;
             color: #1a1410;
@@ -539,7 +541,7 @@
         }
 
         .legal-page h2 {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 600;
             margin: 28px 0 12px;
             color: #1a1410;
@@ -594,9 +596,9 @@
 
         /* ── FOOTER ── */
         footer {
-            border-top: 1px solid #e8e0d8;
+            border-top: 1px solid #f0ece8;
             padding: 40px 0 32px;
-            background: #faf6f0;
+            background: #fcfaf8;
         }
 
         .footer-content {
@@ -641,7 +643,7 @@
             max-width: 1100px;
             margin: 0 auto;
             padding: 20px 24px 0;
-            border-top: 1px solid #e8e0d8;
+            border-top: 1px solid #f0ece8;
             margin-top: 20px;
             text-align: center;
             color: #8a7a6a;
@@ -659,7 +661,6 @@
             }
         }
 
-        /* ── TOAST ── */
         .toast {
             position: fixed;
             bottom: 30px;
@@ -704,14 +705,12 @@
                 <a href="#" data-page="home" class="active" id="navHome">Home</a>
                 <a href="#" data-page="privacy" id="navPrivacy">Privacy</a>
                 <a href="#" data-page="terms" id="navTerms">Terms</a>
-                <a href="#" class="nav-btn" id="installNavBtn">Install</a>
+                <a href="#" class="nav-btn" id="installNavBtn">Get Started</a>
             </div>
         </div>
     </nav>
 
-    <!-- ============================================ -->
     <!-- ── HOME PAGE ── -->
-    <!-- ============================================ -->
     <div id="page-home">
 
         <section class="hero">
@@ -722,7 +721,7 @@
                         <h1>Your inbox,<br /><span class="highlight">actually clean.</span></h1>
                         <p>Stop drowning in emails. InboxAI automatically sorts your Gmail into smart labels, catches phishing, and cleans up the clutter — so you can focus on what matters.</p>
                         <div class="btn-group">
-                            <button class="btn-primary" id="installHeroBtn">✦ Add to Chrome</button>
+                            <button class="btn-primary" id="installHeroBtn">Get Started</button>
                             <button class="btn-secondary" id="learnMoreBtn">Learn More →</button>
                         </div>
                     </div>
@@ -809,7 +808,7 @@
                         <button class="btn btn-outline">Get Started</button>
                     </div>
                     <div class="plan popular">
-                        <div class="pop-badge">⭐ Most Popular</div>
+                        <div class="pop-badge">Most Popular</div>
                         <h3>Premium</h3>
                         <div class="price">₹99 <span>/mo</span></div>
                         <div class="desc">For power users</div>
@@ -853,7 +852,7 @@
                     </div>
                     <div class="faq-item">
                         <h4>How do I install?</h4>
-                        <p>Click "Add to Chrome" on this page. It takes you to the Chrome Web Store where you can add it in one click.</p>
+                        <p>Click "Get Started" on this page. It takes you to the Chrome Web Store where you can add it in one click.</p>
                     </div>
                     <div class="faq-item">
                         <h4>What payment methods?</h4>
@@ -865,9 +864,7 @@
 
     </div>
 
-    <!-- ============================================ -->
     <!-- ── PRIVACY PAGE ── -->
-    <!-- ============================================ -->
     <div id="page-privacy" class="legal-page">
         <div class="container">
             <button class="back-btn" id="backFromPrivacy">← Back to Home</button>
@@ -915,9 +912,7 @@
         </div>
     </div>
 
-    <!-- ============================================ -->
     <!-- ── TERMS PAGE ── -->
-    <!-- ============================================ -->
     <div id="page-terms" class="legal-page">
         <div class="container">
             <button class="back-btn" id="backFromTerms">← Back to Home</button>
@@ -977,7 +972,6 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
 
-            // ── PAGE NAVIGATION ──
             const pages = {
                 home: document.getElementById('page-home'),
                 privacy: document.getElementById('page-privacy'),
@@ -985,48 +979,33 @@
             };
 
             function showPage(pageId) {
-                // Hide all pages
                 Object.keys(pages).forEach(key => {
                     pages[key].style.display = 'none';
                     pages[key].classList.remove('active');
                 });
-                // Show selected page
                 if (pageId === 'home') {
                     pages.home.style.display = 'block';
                 } else {
                     pages[pageId].style.display = 'block';
                     pages[pageId].classList.add('active');
                 }
-                // Update nav links
                 document.querySelectorAll('.nav-links a[data-page]').forEach(link => {
                     link.classList.toggle('active', link.dataset.page === pageId);
                 });
-                // Scroll to top
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
 
-            // Nav links
-            document.querySelectorAll('.nav-links a[data-page]').forEach(link => {
+            document.querySelectorAll('.nav-links a[data-page], .footer-links a[data-page]').forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
                     showPage(this.dataset.page);
                 });
             });
 
-            // Footer links
-            document.querySelectorAll('.footer-links a[data-page]').forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    showPage(this.dataset.page);
-                });
-            });
-
-            // Logo click → Home
             document.getElementById('logoHome').addEventListener('click', function() {
                 showPage('home');
             });
 
-            // Back buttons
             document.getElementById('backFromPrivacy').addEventListener('click', function() {
                 showPage('home');
             });
@@ -1034,12 +1013,10 @@
                 showPage('home');
             });
 
-            // Learn More → Terms
             document.getElementById('learnMoreBtn').addEventListener('click', function() {
                 showPage('terms');
             });
 
-            // Privacy links inside Terms
             document.querySelectorAll('#privacyLinkFromTerms, #privacyLinkFromTerms2').forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -1047,23 +1024,19 @@
                 });
             });
 
-            // ── TOAST ──
             function showToast(message) {
                 const oldToast = document.querySelector('.toast');
                 if (oldToast) oldToast.remove();
-
                 const toast = document.createElement('div');
                 toast.className = 'toast';
                 toast.textContent = message;
                 document.body.appendChild(toast);
-
                 setTimeout(() => {
                     toast.style.animation = 'fadeOut 0.4s ease forwards';
                     setTimeout(() => toast.remove(), 400);
                 }, 4000);
             }
 
-            // ── INSTALL BUTTONS ──
             document.querySelectorAll('#installHeroBtn, #installNavBtn').forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -1071,7 +1044,6 @@
                 });
             });
 
-            // ── PLAN BUTTONS ──
             document.querySelectorAll('.plan .btn').forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     e.preventDefault();
