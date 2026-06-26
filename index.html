@@ -33,6 +33,13 @@
             position: sticky;
             top: 0;
             z-index: 100;
+            transition: box-shadow 0.3s ease, background 0.3s ease;
+        }
+
+        nav.scrolled {
+            box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+            background: rgba(252, 250, 248, 0.92);
+            backdrop-filter: blur(12px);
         }
 
         .nav-container {
@@ -71,6 +78,22 @@
             font-weight: 500;
             transition: color 0.2s;
             cursor: pointer;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #c4956a;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
         .nav-links a:hover {
@@ -88,11 +111,17 @@
             border-radius: 100px;
             font-weight: 600;
             font-size: 13px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn::after {
+            display: none;
         }
 
         .nav-btn:hover {
             background: #2a2420;
-            color: #fff !important;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(26, 20, 16, 0.15);
         }
 
         @media (max-width: 768px) {
@@ -122,6 +151,12 @@
             font-size: 12px;
             font-weight: 600;
             margin-bottom: 16px;
+            animation: pulseGlow 2.5s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(196, 149, 106, 0); }
+            50% { box-shadow: 0 0 0 6px rgba(196, 149, 106, 0.08); }
         }
 
         .hero-left h1 {
@@ -160,13 +195,29 @@
             font-size: 15px;
             border: none;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s ease;
             font-family: inherit;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            transform: scale(0);
+            animation: rippleAnim 0.6s ease-out;
+            pointer-events: none;
+        }
+
+        @keyframes rippleAnim {
+            to { transform: scale(4); opacity: 0; }
         }
 
         .btn-primary:hover {
             background: #2a2420;
             transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(26, 20, 16, 0.2);
         }
 
         .btn-secondary {
@@ -178,7 +229,7 @@
             font-size: 15px;
             border: 1px solid #e0d8d0;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s ease;
             font-family: inherit;
         }
 
@@ -236,11 +287,24 @@
             border-radius: 8px;
             background: #fcfaf8;
             margin-bottom: 6px;
-            transition: all 0.2s;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeUp 0.5s ease forwards;
+        }
+
+        .mockup-row:nth-child(1) { animation-delay: 0.1s; }
+        .mockup-row:nth-child(2) { animation-delay: 0.25s; }
+        .mockup-row:nth-child(3) { animation-delay: 0.4s; }
+        .mockup-row:nth-child(4) { animation-delay: 0.55s; }
+
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .mockup-row:hover {
             background: #f5f0ea;
+            transform: translateX(4px);
         }
 
         .mockup-row .badge {
@@ -295,12 +359,21 @@
             border: 1px solid #f0ece8;
             border-radius: 12px;
             padding: 24px;
-            transition: all 0.2s;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .feature.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.6s ease;
         }
 
         .feature:hover {
             border-color: #c4956a;
             transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(196, 149, 106, 0.08);
         }
 
         .feature .icon {
@@ -351,13 +424,22 @@
             border: 1px solid #f0ece8;
             border-radius: 12px;
             padding: 28px 24px;
-            transition: all 0.2s;
+            transition: all 0.4s ease;
             position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .plan.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.6s ease;
         }
 
         .plan:hover {
-            transform: translateY(-4px);
+            transform: translateY(-6px);
             border-color: #c4956a;
+            box-shadow: 0 12px 32px rgba(196, 149, 106, 0.08);
         }
 
         .plan.popular {
@@ -411,6 +493,19 @@
             padding: 4px 0;
             font-size: 13px;
             color: #4a3a2a;
+            opacity: 0;
+            transform: translateX(-10px);
+            animation: slideIn 0.4s ease forwards;
+        }
+
+        .plan ul li:nth-child(1) { animation-delay: 0.1s; }
+        .plan ul li:nth-child(2) { animation-delay: 0.2s; }
+        .plan ul li:nth-child(3) { animation-delay: 0.3s; }
+        .plan ul li:nth-child(4) { animation-delay: 0.4s; }
+        .plan ul li:nth-child(5) { animation-delay: 0.5s; }
+
+        @keyframes slideIn {
+            to { opacity: 1; transform: translateX(0); }
         }
 
         .plan ul li::before {
@@ -429,7 +524,7 @@
             cursor: pointer;
             font-size: 14px;
             font-family: inherit;
-            transition: all 0.2s;
+            transition: all 0.3s ease;
         }
 
         .plan .btn-primary {
@@ -439,6 +534,7 @@
 
         .plan .btn-primary:hover {
             background: #2a2420;
+            transform: translateY(-2px);
         }
 
         .plan .btn-outline {
@@ -477,6 +573,20 @@
             border: 1px solid #f0ece8;
             border-radius: 12px;
             padding: 18px 22px;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        .faq-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.5s ease;
+        }
+
+        .faq-item:hover {
+            border-color: #c4956a;
+            box-shadow: 0 4px 16px rgba(196, 149, 106, 0.06);
         }
 
         .faq-item h4 {
@@ -507,6 +617,12 @@
 
         .legal-page.active {
             display: block;
+            animation: fadePage 0.5s ease;
+        }
+
+        @keyframes fadePage {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .legal-page .back-btn {
@@ -519,13 +635,14 @@
             font-weight: 500;
             cursor: pointer;
             font-family: inherit;
-            transition: all 0.2s;
+            transition: all 0.3s ease;
             margin-bottom: 32px;
         }
 
         .legal-page .back-btn:hover {
             border-color: #c4956a;
             color: #c4956a;
+            transform: translateX(-4px);
         }
 
         .legal-page h1 {
@@ -623,6 +740,22 @@
             font-size: 13px;
             transition: color 0.2s;
             cursor: pointer;
+            position: relative;
+        }
+
+        .footer-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #c4956a;
+            transition: width 0.3s ease;
+        }
+
+        .footer-links a:hover::after {
+            width: 100%;
         }
 
         .footer-links a:hover {
@@ -661,6 +794,7 @@
             }
         }
 
+        /* ── TOAST ── */
         .toast {
             position: fixed;
             bottom: 30px;
@@ -698,7 +832,7 @@
 <body>
 
     <!-- ── NAV ── -->
-    <nav>
+    <nav id="navbar">
         <div class="nav-container">
             <div class="logo" id="logoHome">✦ <span>InboxAI</span></div>
             <div class="nav-links">
@@ -763,23 +897,23 @@
                     <div class="sub">Features</div>
                     <h2>What <span>InboxAI</span> does for you</h2>
                 </div>
-                <div class="features-grid">
-                    <div class="feature">
+                <div class="features-grid" id="featureGrid">
+                    <div class="feature" data-delay="0">
                         <span class="icon">🏷️</span>
                         <h3>Smart Labels</h3>
                         <p>Automatically categorizes emails into Promotions, Newsletters, Security, Finance, and more.</p>
                     </div>
-                    <div class="feature">
+                    <div class="feature" data-delay="100">
                         <span class="icon">🧹</span>
                         <h3>One-Click Cleanup</h3>
                         <p>Archive hundreds of promotional emails instantly. Reclaim your inbox in seconds.</p>
                     </div>
-                    <div class="feature">
+                    <div class="feature" data-delay="200">
                         <span class="icon">🛡️</span>
                         <h3>Phishing Detection</h3>
                         <p>Identifies suspicious emails with clear explanations and confidence scores.</p>
                     </div>
-                    <div class="feature">
+                    <div class="feature" data-delay="300">
                         <span class="icon">📊</span>
                         <h3>Inbox Analytics</h3>
                         <p>See your clutter score, phishing count, and organization stats at a glance.</p>
@@ -794,8 +928,8 @@
                     <div class="sub">Pricing</div>
                     <h2>Simple, <span>fair</span> pricing</h2>
                 </div>
-                <div class="pricing-grid">
-                    <div class="plan">
+                <div class="pricing-grid" id="pricingGrid">
+                    <div class="plan" data-delay="0">
                         <h3>Free</h3>
                         <div class="price">₹0</div>
                         <div class="desc">For getting started</div>
@@ -807,7 +941,7 @@
                         </ul>
                         <button class="btn btn-outline">Get Started</button>
                     </div>
-                    <div class="plan popular">
+                    <div class="plan popular" data-delay="150">
                         <div class="pop-badge">Most Popular</div>
                         <h3>Premium</h3>
                         <div class="price">₹99 <span>/mo</span></div>
@@ -821,7 +955,7 @@
                         </ul>
                         <button class="btn btn-primary">Upgrade Now</button>
                     </div>
-                    <div class="plan">
+                    <div class="plan" data-delay="300">
                         <h3>International</h3>
                         <div class="price">$1.19 <span>/mo</span></div>
                         <div class="desc">For users outside India</div>
@@ -841,20 +975,20 @@
                     <div class="sub">FAQ</div>
                     <h2>Questions? <span>We've got answers.</span></h2>
                 </div>
-                <div class="faq-grid">
-                    <div class="faq-item">
+                <div class="faq-grid" id="faqGrid">
+                    <div class="faq-item" data-delay="0">
                         <h4>Is my data safe?</h4>
                         <p>Yes. We never store your emails. Processing happens in real-time. Your Gmail token is used only to fetch and classify emails.</p>
                     </div>
-                    <div class="faq-item">
+                    <div class="faq-item" data-delay="100">
                         <h4>What's the free tier?</h4>
                         <p>5 scans per day with 25 emails per scan. Perfect to try it out. Upgrade to Premium for unlimited everything.</p>
                     </div>
-                    <div class="faq-item">
+                    <div class="faq-item" data-delay="200">
                         <h4>How do I install?</h4>
                         <p>Click "Get Started" on this page. It takes you to the Chrome Web Store where you can add it in one click.</p>
                     </div>
-                    <div class="faq-item">
+                    <div class="faq-item" data-delay="300">
                         <h4>What payment methods?</h4>
                         <p>UPI (Google Pay, PhonePe), credit/debit cards, and netbanking. International users can pay via card.</p>
                     </div>
@@ -972,6 +1106,57 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
 
+            // ── NAVBAR SCROLL EFFECT ──
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 20) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // ── RIPPLE EFFECT ON BUTTONS ──
+            document.querySelectorAll('.btn-primary, .btn-secondary, .btn-outline, .btn-nav').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const ripple = document.createElement('span');
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    ripple.className = 'ripple';
+                    ripple.style.width = ripple.style.height = size + 'px';
+                    ripple.style.left = (e.clientX - rect.left - size/2) + 'px';
+                    ripple.style.top = (e.clientY - rect.top - size/2) + 'px';
+                    this.appendChild(ripple);
+                    setTimeout(() => ripple.remove(), 600);
+                });
+            });
+
+            // ── SCROLL REVEAL ANIMATIONS ──
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const el = entry.target;
+                        const delay = parseInt(el.dataset.delay) || 0;
+                        setTimeout(() => {
+                            el.classList.add('visible');
+                        }, delay);
+                    }
+                });
+            }, {
+                threshold: 0.15,
+                rootMargin: '0px 0px -40px 0px'
+            });
+
+            // Observe features
+            document.querySelectorAll('.feature').forEach(el => observer.observe(el));
+
+            // Observe pricing plans
+            document.querySelectorAll('.plan').forEach(el => observer.observe(el));
+
+            // Observe FAQ items
+            document.querySelectorAll('.faq-item').forEach(el => observer.observe(el));
+
+            // ── PAGE NAVIGATION ──
             const pages = {
                 home: document.getElementById('page-home'),
                 privacy: document.getElementById('page-privacy'),
@@ -1024,6 +1209,7 @@
                 });
             });
 
+            // ── TOAST ──
             function showToast(message) {
                 const oldToast = document.querySelector('.toast');
                 if (oldToast) oldToast.remove();
