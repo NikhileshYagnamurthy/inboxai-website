@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>InboxAI — Clean Your Gmail</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,60 +13,76 @@
         }
 
         body {
-            font-family: 'Space Grotesk', sans-serif;
-            background: #0d0d14;
-            color: #fff;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #faf6f0;
+            color: #1a1410;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
         }
 
         /* ── NAV ── */
         nav {
-            max-width: 1200px;
+            padding: 18px 0;
+            border-bottom: 1px solid #e8e0d8;
+            background: #faf6f0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 20px 40px;
+            padding: 0 24px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(255,255,255,0.04);
+            justify-content: space-between;
         }
 
         .logo {
             font-size: 22px;
-            font-weight: 700;
+            font-weight: 800;
+            color: #1a1410;
+            cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 8px;
-            cursor: pointer;
+            gap: 6px;
         }
 
         .logo span {
-            color: #8b5cf6;
+            color: #c4956a;
         }
 
         .nav-links {
             display: flex;
-            gap: 28px;
             align-items: center;
+            gap: 28px;
         }
 
         .nav-links a {
-            color: rgba(255,255,255,0.5);
+            color: #6a5a4a;
             text-decoration: none;
             font-size: 14px;
             font-weight: 500;
-            transition: color 0.3s;
+            transition: color 0.2s;
             cursor: pointer;
         }
 
         .nav-links a:hover {
-            color: #fff;
+            color: #1a1410;
         }
 
         .nav-links a.active {
-            color: #8b5cf6;
+            color: #c4956a;
         }
 
         .nav-btn {
-            background: #8b5cf6;
+            background: #c4956a;
             color: #fff !important;
             padding: 8px 22px;
             border-radius: 100px;
@@ -74,7 +90,8 @@
         }
 
         .nav-btn:hover {
-            background: #7c3aed;
+            background: #b0855a;
+            color: #fff !important;
         }
 
         @media (max-width: 768px) {
@@ -85,43 +102,42 @@
 
         /* ── HERO ── */
         .hero {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 80px 40px 60px;
+            padding: 80px 0 60px;
+        }
+
+        .hero-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 60px;
             align-items: center;
-            min-height: 70vh;
         }
 
-        .hero-left .label {
+        .hero-left .tag {
             display: inline-block;
-            background: rgba(139, 92, 246, 0.12);
-            color: #8b5cf6;
+            background: rgba(196, 149, 106, 0.12);
+            color: #c4956a;
             padding: 4px 14px;
             border-radius: 100px;
             font-size: 12px;
             font-weight: 600;
-            margin-bottom: 20px;
-        }
-
-        .hero-left h1 {
-            font-size: 52px;
-            font-weight: 800;
-            line-height: 1.05;
             margin-bottom: 16px;
         }
 
+        .hero-left h1 {
+            font-size: 48px;
+            font-weight: 800;
+            line-height: 1.05;
+            margin-bottom: 16px;
+            color: #1a1410;
+        }
+
         .hero-left h1 .highlight {
-            background: linear-gradient(135deg, #8b5cf6, #f472b6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #c4956a;
         }
 
         .hero-left p {
             font-size: 17px;
-            color: rgba(255,255,255,0.5);
+            color: #5a4a3a;
             max-width: 440px;
             line-height: 1.7;
             margin-bottom: 28px;
@@ -134,59 +150,58 @@
         }
 
         .btn-primary {
-            background: #8b5cf6;
+            background: #c4956a;
             color: #fff;
             padding: 14px 32px;
             border-radius: 100px;
             font-weight: 600;
             font-size: 15px;
-            text-decoration: none;
             border: none;
             cursor: pointer;
-            transition: all 0.3s;
-            font-family: 'Space Grotesk', sans-serif;
+            transition: all 0.2s;
+            font-family: inherit;
         }
 
         .btn-primary:hover {
-            background: #7c3aed;
+            background: #b0855a;
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(139, 92, 246, 0.3);
         }
 
         .btn-secondary {
-            background: rgba(255,255,255,0.04);
-            color: #fff;
+            background: transparent;
+            color: #1a1410;
             padding: 14px 32px;
             border-radius: 100px;
             font-weight: 600;
             font-size: 15px;
-            text-decoration: none;
-            border: 1px solid rgba(255,255,255,0.08);
+            border: 1px solid #d4c8bc;
             cursor: pointer;
-            transition: all 0.3s;
-            font-family: 'Space Grotesk', sans-serif;
+            transition: all 0.2s;
+            font-family: inherit;
         }
 
         .btn-secondary:hover {
-            background: rgba(255,255,255,0.08);
+            border-color: #c4956a;
+            color: #c4956a;
             transform: translateY(-2px);
         }
 
+        /* ── MOCKUP ── */
         .mockup {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 20px;
+            background: #ffffff;
+            border: 1px solid #e8e0d8;
+            border-radius: 16px;
             padding: 20px;
-            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
         }
 
         .mockup-header {
             display: flex;
             align-items: center;
             gap: 12px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid rgba(255,255,255,0.04);
-            margin-bottom: 16px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid #f0e8e0;
+            margin-bottom: 14px;
         }
 
         .mockup-dots {
@@ -201,13 +216,14 @@
             display: inline-block;
         }
 
-        .mockup-dots .red { background: #f87171; }
-        .mockup-dots .yellow { background: #fbbf24; }
-        .mockup-dots .green { background: #34d399; }
+        .mockup-dots .red { background: #f5d0c8; }
+        .mockup-dots .yellow { background: #f5e0b8; }
+        .mockup-dots .green { background: #c8e0c8; }
 
         .mockup-title {
             font-size: 12px;
-            color: rgba(255,255,255,0.2);
+            color: #a09080;
+            font-weight: 500;
         }
 
         .mockup-row {
@@ -215,14 +231,14 @@
             align-items: center;
             gap: 12px;
             padding: 10px 14px;
-            border-radius: 10px;
-            background: rgba(255,255,255,0.02);
+            border-radius: 8px;
+            background: #faf6f0;
             margin-bottom: 6px;
-            transition: all 0.3s;
+            transition: all 0.2s;
         }
 
         .mockup-row:hover {
-            background: rgba(255,255,255,0.04);
+            background: #f0e8e0;
         }
 
         .mockup-row .badge {
@@ -234,21 +250,19 @@
             flex-shrink: 0;
         }
 
-        .badge-pink { background: rgba(244, 114, 182, 0.15); color: #f472b6; }
-        .badge-purple { background: rgba(139, 92, 246, 0.15); color: #8b5cf6; }
-        .badge-orange { background: rgba(251, 146, 60, 0.15); color: #fb923c; }
-        .badge-green { background: rgba(52, 211, 153, 0.15); color: #34d399; }
+        .badge-pink { background: #fce4e0; color: #c47a6a; }
+        .badge-clay { background: #f5ebe0; color: #c4956a; }
+        .badge-orange { background: #fef0e0; color: #c48a5a; }
+        .badge-green { background: #e4f0e4; color: #6a9a6a; }
 
         .mockup-row .text {
             font-size: 13px;
-            color: rgba(255,255,255,0.6);
+            color: #3a2a1a;
         }
 
         @media (max-width: 768px) {
-            .hero {
+            .hero-grid {
                 grid-template-columns: 1fr;
-                padding: 40px 20px;
-                gap: 40px;
                 text-align: center;
             }
             .hero-left p {
@@ -264,10 +278,8 @@
 
         /* ── FEATURES ── */
         .features {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 80px 40px;
-            border-top: 1px solid rgba(255,255,255,0.04);
+            padding: 80px 0;
+            border-top: 1px solid #e8e0d8;
         }
 
         .features-grid {
@@ -277,15 +289,15 @@
         }
 
         .feature {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.04);
-            border-radius: 14px;
+            background: #ffffff;
+            border: 1px solid #e8e0d8;
+            border-radius: 12px;
             padding: 24px;
-            transition: all 0.3s;
+            transition: all 0.2s;
         }
 
         .feature:hover {
-            border-color: rgba(139, 92, 246, 0.2);
+            border-color: #c4956a;
             transform: translateY(-4px);
         }
 
@@ -299,11 +311,12 @@
             font-size: 16px;
             font-weight: 600;
             margin-bottom: 4px;
+            color: #1a1410;
         }
 
         .feature p {
             font-size: 13px;
-            color: rgba(255,255,255,0.4);
+            color: #6a5a4a;
             line-height: 1.6;
         }
 
@@ -321,10 +334,8 @@
 
         /* ── PRICING ── */
         .pricing {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 80px 40px;
-            border-top: 1px solid rgba(255,255,255,0.04);
+            padding: 80px 0;
+            border-top: 1px solid #e8e0d8;
         }
 
         .pricing-grid {
@@ -334,21 +345,22 @@
         }
 
         .plan {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.04);
+            background: #ffffff;
+            border: 1px solid #e8e0d8;
             border-radius: 14px;
             padding: 28px 24px;
-            transition: all 0.3s;
+            transition: all 0.2s;
             position: relative;
         }
 
         .plan:hover {
             transform: translateY(-4px);
+            border-color: #c4956a;
         }
 
         .plan.popular {
-            border-color: rgba(139, 92, 246, 0.3);
-            background: rgba(139, 92, 246, 0.04);
+            border-color: #c4956a;
+            background: #fefcf9;
         }
 
         .plan .pop-badge {
@@ -356,7 +368,7 @@
             top: -12px;
             left: 50%;
             transform: translateX(-50%);
-            background: #8b5cf6;
+            background: #c4956a;
             color: #fff;
             padding: 4px 16px;
             border-radius: 100px;
@@ -366,22 +378,24 @@
 
         .plan h3 {
             font-size: 17px;
+            color: #1a1410;
             margin-bottom: 2px;
         }
 
         .plan .price {
             font-size: 34px;
             font-weight: 700;
+            color: #1a1410;
         }
 
         .plan .price span {
             font-size: 13px;
             font-weight: 400;
-            color: rgba(255,255,255,0.3);
+            color: #8a7a6a;
         }
 
         .plan .desc {
-            color: rgba(255,255,255,0.3);
+            color: #6a5a4a;
             font-size: 13px;
             margin-bottom: 16px;
         }
@@ -394,12 +408,12 @@
         .plan ul li {
             padding: 4px 0;
             font-size: 13px;
-            color: rgba(255,255,255,0.6);
+            color: #4a3a2a;
         }
 
         .plan ul li::before {
             content: '✦ ';
-            color: #8b5cf6;
+            color: #c4956a;
         }
 
         .plan .btn {
@@ -409,32 +423,31 @@
             padding: 12px;
             border-radius: 100px;
             font-weight: 600;
-            text-decoration: none;
             border: none;
             cursor: pointer;
             font-size: 14px;
-            font-family: 'Space Grotesk', sans-serif;
-            transition: all 0.3s;
+            font-family: inherit;
+            transition: all 0.2s;
         }
 
         .plan .btn-primary {
-            background: #8b5cf6;
+            background: #c4956a;
             color: #fff;
         }
 
         .plan .btn-primary:hover {
-            background: #7c3aed;
+            background: #b0855a;
         }
 
         .plan .btn-outline {
             background: transparent;
-            color: #fff;
-            border: 1px solid rgba(255,255,255,0.08);
+            color: #1a1410;
+            border: 1px solid #d4c8bc;
         }
 
         .plan .btn-outline:hover {
-            border-color: #8b5cf6;
-            color: #8b5cf6;
+            border-color: #c4956a;
+            color: #c4956a;
         }
 
         @media (max-width: 768px) {
@@ -447,37 +460,46 @@
 
         /* ── FAQ ── */
         .faq {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 80px 40px;
-            border-top: 1px solid rgba(255,255,255,0.04);
+            padding: 80px 0;
+            border-top: 1px solid #e8e0d8;
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
         }
 
         .faq-item {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.04);
+            background: #ffffff;
+            border: 1px solid #e8e0d8;
             border-radius: 12px;
             padding: 18px 22px;
-            margin-bottom: 10px;
         }
 
         .faq-item h4 {
             font-size: 15px;
             font-weight: 600;
             margin-bottom: 2px;
+            color: #1a1410;
         }
 
         .faq-item p {
             font-size: 14px;
-            color: rgba(255,255,255,0.4);
+            color: #6a5a4a;
             line-height: 1.6;
         }
 
-        /* ── LEGAL PAGES (Privacy + Terms) ── */
+        @media (max-width: 768px) {
+            .faq-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ── LEGAL PAGES (Privacy & Terms) ── */
         .legal-page {
-            max-width: 800px;
-            margin: 60px auto;
-            padding: 0 40px 80px;
+            padding: 60px 0 80px;
+            border-top: 1px solid #e8e0d8;
             display: none;
         }
 
@@ -485,14 +507,34 @@
             display: block;
         }
 
+        .legal-page .back-btn {
+            background: transparent;
+            border: 1px solid #d4c8bc;
+            color: #1a1410;
+            padding: 8px 20px;
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.2s;
+            margin-bottom: 32px;
+        }
+
+        .legal-page .back-btn:hover {
+            border-color: #c4956a;
+            color: #c4956a;
+        }
+
         .legal-page h1 {
             font-size: 36px;
             font-weight: 800;
             margin-bottom: 4px;
+            color: #1a1410;
         }
 
         .legal-page .date {
-            color: rgba(255,255,255,0.3);
+            color: #8a7a6a;
             margin-bottom: 32px;
         }
 
@@ -500,23 +542,24 @@
             font-size: 20px;
             font-weight: 600;
             margin: 28px 0 12px;
+            color: #1a1410;
         }
 
         .legal-page p {
-            color: rgba(255,255,255,0.5);
+            color: #5a4a3a;
             line-height: 1.8;
             margin-bottom: 12px;
         }
 
         .legal-page ul {
-            color: rgba(255,255,255,0.5);
+            color: #5a4a3a;
             line-height: 1.8;
             padding-left: 20px;
             margin-bottom: 16px;
         }
 
         .legal-page a {
-            color: #8b5cf6;
+            color: #c4956a;
             text-decoration: none;
         }
 
@@ -524,59 +567,7 @@
             text-decoration: underline;
         }
 
-        .back-btn {
-            background: rgba(255,255,255,0.04);
-            color: #fff;
-            padding: 8px 20px;
-            border-radius: 100px;
-            border: 1px solid rgba(255,255,255,0.08);
-            cursor: pointer;
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 13px;
-            transition: all 0.3s;
-            margin-bottom: 24px;
-        }
-
-        .back-btn:hover {
-            background: rgba(255,255,255,0.08);
-        }
-
-        /* ── FOOTER ── */
-        footer {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px;
-            border-top: 1px solid rgba(255,255,255,0.04);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 24px;
-        }
-
-        .footer-links a {
-            color: rgba(255,255,255,0.3);
-            text-decoration: none;
-            font-size: 13px;
-            transition: color 0.3s;
-            cursor: pointer;
-        }
-
-        .footer-links a:hover {
-            color: #fff;
-        }
-
-        @media (max-width: 768px) {
-            footer {
-                flex-direction: column;
-                gap: 16px;
-                text-align: center;
-            }
-        }
-
+        /* ── SECTION TITLES ── */
         .section-title {
             text-align: center;
             margin-bottom: 40px;
@@ -587,44 +578,102 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 2px;
-            color: rgba(255,255,255,0.2);
+            color: #b0a090;
         }
 
         .section-title h2 {
             font-size: 32px;
             font-weight: 700;
-            margin-top: 2px;
+            margin-top: 4px;
+            color: #1a1410;
         }
 
         .section-title h2 span {
-            color: #8b5cf6;
+            color: #c4956a;
         }
 
-        .page-section {
-            display: block;
+        /* ── FOOTER ── */
+        footer {
+            border-top: 1px solid #e8e0d8;
+            padding: 40px 0 32px;
+            background: #faf6f0;
         }
 
-        .page-section.hidden {
-            display: none;
+        .footer-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
         }
 
-        /* Toast message */
-        .custom-toast {
+        .footer-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-links a {
+            color: #8a7a6a;
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.2s;
+            cursor: pointer;
+        }
+
+        .footer-links a:hover {
+            color: #1a1410;
+        }
+
+        .footer-brand {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a1410;
+        }
+
+        .footer-brand span {
+            color: #c4956a;
+        }
+
+        .footer-bottom {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px 24px 0;
+            border-top: 1px solid #e8e0d8;
+            margin-top: 20px;
+            text-align: center;
+            color: #8a7a6a;
+            font-size: 13px;
+        }
+
+        @media (max-width: 768px) {
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .footer-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        /* ── TOAST ── */
+        .toast {
             position: fixed;
             bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
-            background: #1a1a2e;
-            border: 1px solid rgba(139, 92, 246, 0.3);
-            color: #fff;
-            padding: 16px 28px;
+            background: #1a1410;
+            color: #f0ece8;
+            padding: 14px 28px;
             border-radius: 12px;
-            font-family: 'Space Grotesk', sans-serif;
             font-size: 14px;
             max-width: 420px;
             text-align: center;
             z-index: 9999;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
             animation: slideUp 0.4s ease;
             white-space: pre-line;
             line-height: 1.6;
@@ -634,9 +683,14 @@
             from { opacity: 0; transform: translateX(-50%) translateY(20px); }
             to { opacity: 1; transform: translateX(-50%) translateY(0); }
         }
+
         @keyframes fadeOut {
             from { opacity: 1; }
             to { opacity: 0; transform: translateX(-50%) translateY(10px); }
+        }
+
+        .hidden {
+            display: none !important;
         }
     </style>
 </head>
@@ -644,160 +698,178 @@
 
     <!-- ── NAV ── -->
     <nav>
-        <div class="logo" id="logoHome">✦ <span>InboxAI</span></div>
-        <div class="nav-links">
-            <a href="#" data-page="home" class="active" id="navHome">Home</a>
-            <a href="#" data-page="privacy" id="navPrivacy">Privacy</a>
-            <a href="#" data-page="terms" id="navTerms">Terms</a>
-            <a href="#" class="nav-btn" id="installNavBtn">Install</a>
+        <div class="nav-container">
+            <div class="logo" id="logoHome">✦ <span>InboxAI</span></div>
+            <div class="nav-links">
+                <a href="#" data-page="home" class="active" id="navHome">Home</a>
+                <a href="#" data-page="privacy" id="navPrivacy">Privacy</a>
+                <a href="#" data-page="terms" id="navTerms">Terms</a>
+                <a href="#" class="nav-btn" id="installNavBtn">Install</a>
+            </div>
         </div>
     </nav>
 
+    <!-- ============================================ -->
     <!-- ── HOME PAGE ── -->
-    <div id="page-home" class="page-section">
+    <!-- ============================================ -->
+    <div id="page-home">
 
         <section class="hero">
-            <div class="hero-left">
-                <div class="label">✦ AI-Powered</div>
-                <h1>Your inbox,<br /><span class="highlight">actually clean.</span></h1>
-                <p>Stop drowning in emails. InboxAI automatically sorts your Gmail into smart labels, catches phishing, and cleans up the clutter — so you can focus on what matters.</p>
-                <div class="btn-group">
-                    <button class="btn-primary" id="installHeroBtn">✦ Add to Chrome</button>
-                    <button class="btn-secondary" id="learnMoreBtn">Learn More →</button>
-                </div>
-            </div>
-            <div class="hero-right">
-                <div class="mockup">
-                    <div class="mockup-header">
-                        <div class="mockup-dots">
-                            <span class="red"></span>
-                            <span class="yellow"></span>
-                            <span class="green"></span>
+            <div class="container">
+                <div class="hero-grid">
+                    <div class="hero-left">
+                        <div class="tag">✦ AI-Powered</div>
+                        <h1>Your inbox,<br /><span class="highlight">actually clean.</span></h1>
+                        <p>Stop drowning in emails. InboxAI automatically sorts your Gmail into smart labels, catches phishing, and cleans up the clutter — so you can focus on what matters.</p>
+                        <div class="btn-group">
+                            <button class="btn-primary" id="installHeroBtn">✦ Add to Chrome</button>
+                            <button class="btn-secondary" id="learnMoreBtn">Learn More →</button>
                         </div>
-                        <span class="mockup-title">InboxAI</span>
                     </div>
-                    <div class="mockup-row">
-                        <span class="badge badge-pink">Promotion</span>
-                        <span class="text">50% off your next order</span>
-                    </div>
-                    <div class="mockup-row">
-                        <span class="badge badge-purple">Newsletter</span>
-                        <span class="text">Weekly digest #42</span>
-                    </div>
-                    <div class="mockup-row">
-                        <span class="badge badge-orange">Security</span>
-                        <span class="text">New login detected</span>
-                    </div>
-                    <div class="mockup-row">
-                        <span class="badge badge-green">Finance</span>
-                        <span class="text">Your invoice is ready</span>
+                    <div class="hero-right">
+                        <div class="mockup">
+                            <div class="mockup-header">
+                                <div class="mockup-dots">
+                                    <span class="red"></span>
+                                    <span class="yellow"></span>
+                                    <span class="green"></span>
+                                </div>
+                                <span class="mockup-title">InboxAI</span>
+                            </div>
+                            <div class="mockup-row">
+                                <span class="badge badge-pink">Promotion</span>
+                                <span class="text">50% off your next order</span>
+                            </div>
+                            <div class="mockup-row">
+                                <span class="badge badge-clay">Newsletter</span>
+                                <span class="text">Weekly digest #42</span>
+                            </div>
+                            <div class="mockup-row">
+                                <span class="badge badge-orange">Security</span>
+                                <span class="text">New login detected</span>
+                            </div>
+                            <div class="mockup-row">
+                                <span class="badge badge-green">Finance</span>
+                                <span class="text">Your invoice is ready</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
         <section class="features" id="features">
-            <div class="section-title">
-                <div class="sub">Features</div>
-                <h2>What <span>InboxAI</span> does for you</h2>
-            </div>
-            <div class="features-grid">
-                <div class="feature">
-                    <span class="icon">🏷️</span>
-                    <h3>Smart Labels</h3>
-                    <p>Automatically categorizes emails into Promotions, Newsletters, Security, Finance, and more.</p>
+            <div class="container">
+                <div class="section-title">
+                    <div class="sub">Features</div>
+                    <h2>What <span>InboxAI</span> does for you</h2>
                 </div>
-                <div class="feature">
-                    <span class="icon">🧹</span>
-                    <h3>One-Click Cleanup</h3>
-                    <p>Archive hundreds of promotional emails instantly. Reclaim your inbox in seconds.</p>
-                </div>
-                <div class="feature">
-                    <span class="icon">🛡️</span>
-                    <h3>Phishing Detection</h3>
-                    <p>Identifies suspicious emails with clear explanations and confidence scores.</p>
-                </div>
-                <div class="feature">
-                    <span class="icon">📊</span>
-                    <h3>Inbox Analytics</h3>
-                    <p>See your clutter score, phishing count, and organization stats at a glance.</p>
+                <div class="features-grid">
+                    <div class="feature">
+                        <span class="icon">🏷️</span>
+                        <h3>Smart Labels</h3>
+                        <p>Automatically categorizes emails into Promotions, Newsletters, Security, Finance, and more.</p>
+                    </div>
+                    <div class="feature">
+                        <span class="icon">🧹</span>
+                        <h3>One-Click Cleanup</h3>
+                        <p>Archive hundreds of promotional emails instantly. Reclaim your inbox in seconds.</p>
+                    </div>
+                    <div class="feature">
+                        <span class="icon">🛡️</span>
+                        <h3>Phishing Detection</h3>
+                        <p>Identifies suspicious emails with clear explanations and confidence scores.</p>
+                    </div>
+                    <div class="feature">
+                        <span class="icon">📊</span>
+                        <h3>Inbox Analytics</h3>
+                        <p>See your clutter score, phishing count, and organization stats at a glance.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section class="pricing" id="pricing">
-            <div class="section-title">
-                <div class="sub">Pricing</div>
-                <h2>Simple, <span>fair</span> pricing</h2>
-            </div>
-            <div class="pricing-grid">
-                <div class="plan">
-                    <h3>Free</h3>
-                    <div class="price">₹0</div>
-                    <div class="desc">For getting started</div>
-                    <ul>
-                        <li>5 scans per day</li>
-                        <li>25 emails per scan</li>
-                        <li>Smart labels</li>
-                        <li>Basic phishing detection</li>
-                    </ul>
-                    <button class="btn btn-outline">Get Started</button>
+            <div class="container">
+                <div class="section-title">
+                    <div class="sub">Pricing</div>
+                    <h2>Simple, <span>fair</span> pricing</h2>
                 </div>
-                <div class="plan popular">
-                    <div class="pop-badge">⭐ Most Popular</div>
-                    <h3>Premium</h3>
-                    <div class="price">₹99 <span>/mo</span></div>
-                    <div class="desc">For power users</div>
-                    <ul>
-                        <li>Unlimited scans</li>
-                        <li>Unlimited emails</li>
-                        <li>Bulk cleanup (500+)</li>
-                        <li>Deep AI explanations</li>
-                        <li>Advanced analytics</li>
-                    </ul>
-                    <button class="btn btn-primary">Upgrade Now</button>
-                </div>
-                <div class="plan">
-                    <h3>International</h3>
-                    <div class="price">$1.19 <span>/mo</span></div>
-                    <div class="desc">For users outside India</div>
-                    <ul>
-                        <li>All Premium features</li>
-                        <li>Global payment support</li>
-                    </ul>
-                    <button class="btn btn-outline">Upgrade Now</button>
+                <div class="pricing-grid">
+                    <div class="plan">
+                        <h3>Free</h3>
+                        <div class="price">₹0</div>
+                        <div class="desc">For getting started</div>
+                        <ul>
+                            <li>5 scans per day</li>
+                            <li>25 emails per scan</li>
+                            <li>Smart labels</li>
+                            <li>Basic phishing detection</li>
+                        </ul>
+                        <button class="btn btn-outline">Get Started</button>
+                    </div>
+                    <div class="plan popular">
+                        <div class="pop-badge">⭐ Most Popular</div>
+                        <h3>Premium</h3>
+                        <div class="price">₹99 <span>/mo</span></div>
+                        <div class="desc">For power users</div>
+                        <ul>
+                            <li>Unlimited scans</li>
+                            <li>Unlimited emails</li>
+                            <li>Bulk cleanup (500+)</li>
+                            <li>Deep AI explanations</li>
+                            <li>Advanced analytics</li>
+                        </ul>
+                        <button class="btn btn-primary">Upgrade Now</button>
+                    </div>
+                    <div class="plan">
+                        <h3>International</h3>
+                        <div class="price">$1.19 <span>/mo</span></div>
+                        <div class="desc">For users outside India</div>
+                        <ul>
+                            <li>All Premium features</li>
+                            <li>Global payment support</li>
+                        </ul>
+                        <button class="btn btn-outline">Upgrade Now</button>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section class="faq" id="faq">
-            <div class="section-title">
-                <div class="sub">FAQ</div>
-                <h2>Questions? <span>We've got answers.</span></h2>
-            </div>
-            <div class="faq-item">
-                <h4>Is my data safe?</h4>
-                <p>Yes. We never store your emails. Processing happens in real-time. Your Gmail token is used only to fetch and classify emails.</p>
-            </div>
-            <div class="faq-item">
-                <h4>What's the free tier?</h4>
-                <p>5 scans per day with 25 emails per scan. Perfect to try it out. Upgrade to Premium for unlimited everything.</p>
-            </div>
-            <div class="faq-item">
-                <h4>How do I install?</h4>
-                <p>Click "Add to Chrome" on this page. It takes you to the Chrome Web Store where you can add it in one click.</p>
-            </div>
-            <div class="faq-item">
-                <h4>What payment methods?</h4>
-                <p>UPI (Google Pay, PhonePe), credit/debit cards, and netbanking. International users can pay via card.</p>
+            <div class="container">
+                <div class="section-title">
+                    <div class="sub">FAQ</div>
+                    <h2>Questions? <span>We've got answers.</span></h2>
+                </div>
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <h4>Is my data safe?</h4>
+                        <p>Yes. We never store your emails. Processing happens in real-time. Your Gmail token is used only to fetch and classify emails.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>What's the free tier?</h4>
+                        <p>5 scans per day with 25 emails per scan. Perfect to try it out. Upgrade to Premium for unlimited everything.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>How do I install?</h4>
+                        <p>Click "Add to Chrome" on this page. It takes you to the Chrome Web Store where you can add it in one click.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>What payment methods?</h4>
+                        <p>UPI (Google Pay, PhonePe), credit/debit cards, and netbanking. International users can pay via card.</p>
+                    </div>
+                </div>
             </div>
         </section>
 
     </div>
 
+    <!-- ============================================ -->
     <!-- ── PRIVACY PAGE ── -->
-    <div id="page-privacy" class="page-section hidden">
-        <div class="legal-page active">
+    <!-- ============================================ -->
+    <div id="page-privacy" class="legal-page">
+        <div class="container">
             <button class="back-btn" id="backFromPrivacy">← Back to Home</button>
             <h1>Privacy Policy</h1>
             <p class="date">Last updated: June 2026</p>
@@ -843,9 +915,11 @@
         </div>
     </div>
 
+    <!-- ============================================ -->
     <!-- ── TERMS PAGE ── -->
-    <div id="page-terms" class="page-section hidden">
-        <div class="legal-page active">
+    <!-- ============================================ -->
+    <div id="page-terms" class="legal-page">
+        <div class="container">
             <button class="back-btn" id="backFromTerms">← Back to Home</button>
             <h1>Terms of Service</h1>
             <p class="date">Last updated: June 2026</p>
@@ -887,11 +961,16 @@
 
     <!-- ── FOOTER ── -->
     <footer>
-        <div class="logo" style="font-size:18px;">✦ <span>InboxAI</span></div>
-        <div class="footer-links">
-            <a href="#" data-page="home">Home</a>
-            <a href="#" data-page="privacy">Privacy</a>
-            <a href="#" data-page="terms">Terms</a>
+        <div class="footer-content">
+            <div class="footer-brand">✦ <span>InboxAI</span></div>
+            <div class="footer-links">
+                <a href="#" data-page="home">Home</a>
+                <a href="#" data-page="privacy">Privacy</a>
+                <a href="#" data-page="terms">Terms</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2026 InboxAI. All rights reserved.
         </div>
     </footer>
 
@@ -908,10 +987,16 @@
             function showPage(pageId) {
                 // Hide all pages
                 Object.keys(pages).forEach(key => {
-                    pages[key].classList.add('hidden');
+                    pages[key].style.display = 'none';
+                    pages[key].classList.remove('active');
                 });
                 // Show selected page
-                pages[pageId].classList.remove('hidden');
+                if (pageId === 'home') {
+                    pages.home.style.display = 'block';
+                } else {
+                    pages[pageId].style.display = 'block';
+                    pages[pageId].classList.add('active');
+                }
                 // Update nav links
                 document.querySelectorAll('.nav-links a[data-page]').forEach(link => {
                     link.classList.toggle('active', link.dataset.page === pageId);
@@ -921,7 +1006,15 @@
             }
 
             // Nav links
-            document.querySelectorAll('.nav-links a[data-page], .footer-links a[data-page]').forEach(link => {
+            document.querySelectorAll('.nav-links a[data-page]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showPage(this.dataset.page);
+                });
+            });
+
+            // Footer links
+            document.querySelectorAll('.footer-links a[data-page]').forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
                     showPage(this.dataset.page);
@@ -954,6 +1047,22 @@
                 });
             });
 
+            // ── TOAST ──
+            function showToast(message) {
+                const oldToast = document.querySelector('.toast');
+                if (oldToast) oldToast.remove();
+
+                const toast = document.createElement('div');
+                toast.className = 'toast';
+                toast.textContent = message;
+                document.body.appendChild(toast);
+
+                setTimeout(() => {
+                    toast.style.animation = 'fadeOut 0.4s ease forwards';
+                    setTimeout(() => toast.remove(), 400);
+                }, 4000);
+            }
+
             // ── INSTALL BUTTONS ──
             document.querySelectorAll('#installHeroBtn, #installNavBtn').forEach(btn => {
                 btn.addEventListener('click', function(e) {
@@ -969,22 +1078,6 @@
                     showToast('✨ Premium features will be available soon!\n\n💳 Payments are coming with Razorpay integration.');
                 });
             });
-
-            // ── TOAST ──
-            function showToast(message) {
-                const oldToast = document.querySelector('.custom-toast');
-                if (oldToast) oldToast.remove();
-
-                const toast = document.createElement('div');
-                toast.className = 'custom-toast';
-                toast.textContent = message;
-                document.body.appendChild(toast);
-
-                setTimeout(() => {
-                    toast.style.animation = 'fadeOut 0.4s ease forwards';
-                    setTimeout(() => toast.remove(), 400);
-                }, 4000);
-            }
 
         });
     </script>
