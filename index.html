@@ -4,108 +4,76 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>InboxAI — Smart Gmail Organizer</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-    <!-- ===== NAVBAR ===== -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="nav-brand">
-                <span class="logo-icon">✦</span>
-                <span class="logo-text">InboxAI</span>
+    <!-- NAV -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <span>✦</span> InboxAI
             </div>
-            <ul class="nav-links">
-                <li><a href="#features">Features</a></li>
-                <li><a href="#pricing">Pricing</a></li>
-                <li><a href="#faq">FAQ</a></li>
-                <li><a href="privacy.html">Privacy</a></li>
-            </ul>
-            <a href="#" class="btn btn-primary btn-install">Install Extension</a>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#faq">FAQ</a>
+                <a href="privacy.html">Privacy</a>
+                <a href="#" class="btn-nav">Install</a>
+            </div>
         </div>
     </nav>
 
-    <!-- ===== HERO ===== -->
+    <!-- HERO -->
     <section class="hero">
         <div class="container">
             <div class="hero-grid">
                 <div class="hero-text">
-                    <div class="hero-badge">
-                        <span class="badge-dot"></span>
-                        AI-Powered Gmail Organizer
+                    <div class="badge">🚀 AI-Powered</div>
+                    <h1>Your inbox,<br />but <span>actually clean</span></h1>
+                    <p>Stop drowning in emails. InboxAI automatically sorts your Gmail into smart labels, catches phishing, and cleans up the clutter — so you can focus on what matters.</p>
+                    <div class="buttons">
+                        <a href="#" class="btn primary">Add to Chrome — It's Free</a>
+                        <a href="#features" class="btn secondary">See how it works →</a>
                     </div>
-                    <h1>Clean Inbox,<br /><span class="gradient-text">Clear Mind.</span></h1>
-                    <p class="hero-sub">
-                        Automatically organize your Gmail with AI. Labels promotions, newsletters,
-                        phishing, and more — so you can focus on what matters.
-                    </p>
-                    <div class="hero-buttons">
-                        <a href="#" class="btn btn-primary btn-lg">
-                            🚀 Install Extension
-                        </a>
-                        <a href="#features" class="btn btn-outline btn-lg">
-                            Learn More →
-                        </a>
-                    </div>
-                    <div class="hero-stats">
-                        <div class="stat">
-                            <span class="stat-number">500+</span>
-                            <span class="stat-label">Emails Organized</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number">98%</span>
-                            <span class="stat-label">Accuracy Rate</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number">4.9</span>
-                            <span class="stat-label">⭐ User Rating</span>
-                        </div>
+                    <div class="trust">
+                        <span>✦ 500+ users</span>
+                        <span>✦ 4.9 rating</span>
+                        <span>✦ 98% accuracy</span>
                     </div>
                 </div>
-                <div class="hero-visual">
-                    <div class="mockup">
-                        <div class="mockup-header">
-                            <div class="mockup-dots">
+                <div class="hero-image">
+                    <div class="card-ui">
+                        <div class="card-header">
+                            <span class="dots">
                                 <span class="dot red"></span>
                                 <span class="dot yellow"></span>
                                 <span class="dot green"></span>
-                            </div>
-                            <span class="mockup-title">InboxAI</span>
+                            </span>
+                            <span>InboxAI</span>
                         </div>
-                        <div class="mockup-body">
-                            <div class="mockup-stats">
-                                <div class="mockup-stat">
-                                    <span class="stat-icon">📊</span>
-                                    <span>25 scanned</span>
-                                </div>
-                                <div class="mockup-stat">
-                                    <span class="stat-icon">🔥</span>
-                                    <span>45% clutter</span>
-                                </div>
-                                <div class="mockup-stat">
-                                    <span class="stat-icon">⚠️</span>
-                                    <span>3 phishing</span>
-                                </div>
+                        <div class="card-body">
+                            <div class="stats-row">
+                                <span>📊 25 scanned</span>
+                                <span>🔥 45% clutter</span>
+                                <span>⚠️ 3 phishing</span>
                             </div>
-                            <div class="mockup-emails">
-                                <div class="mockup-email">
-                                    <span class="badge badge-promotion">Promotion</span>
-                                    <span class="email-subject">50% off your next order</span>
-                                </div>
-                                <div class="mockup-email">
-                                    <span class="badge badge-newsletter">Newsletter</span>
-                                    <span class="email-subject">Weekly digest #42</span>
-                                </div>
-                                <div class="mockup-email">
-                                    <span class="badge badge-security">Security</span>
-                                    <span class="email-subject">New login detected</span>
-                                </div>
-                                <div class="mockup-email">
-                                    <span class="badge badge-finance">Finance</span>
-                                    <span class="email-subject">Your invoice is ready</span>
-                                </div>
+                            <div class="email-row">
+                                <span class="tag promo">Promotion</span>
+                                <span>50% off your next order</span>
+                            </div>
+                            <div class="email-row">
+                                <span class="tag news">Newsletter</span>
+                                <span>Weekly digest #42</span>
+                            </div>
+                            <div class="email-row">
+                                <span class="tag secure">Security</span>
+                                <span>New login detected</span>
+                            </div>
+                            <div class="email-row">
+                                <span class="tag finance">Finance</span>
+                                <span>Your invoice is ready</span>
                             </div>
                         </div>
                     </div>
@@ -114,32 +82,29 @@
         </div>
     </section>
 
-    <!-- ===== FEATURES ===== -->
+    <!-- FEATURES -->
     <section class="features" id="features">
         <div class="container">
-            <div class="section-header">
-                <span class="section-tag">Features</span>
-                <h2>Why InboxAI?</h2>
-                <p>AI that actually understands your email</p>
-            </div>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🏷️</div>
+            <div class="section-label">Features</div>
+            <h2 class="section-title">What InboxAI does for you</h2>
+            <div class="feature-grid">
+                <div class="feature">
+                    <div class="icon">🏷️</div>
                     <h3>Smart Labels</h3>
-                    <p>Automatically categorize emails into Promotions, Newsletters, Security, Finance, and more.</p>
+                    <p>Automatically categorizes emails into Promotions, Newsletters, Security, Finance, and more.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🧹</div>
+                <div class="feature">
+                    <div class="icon">🧹</div>
                     <h3>One-Click Cleanup</h3>
-                    <p>Archive hundreds of promotional emails with a single click. Reclaim your inbox instantly.</p>
+                    <p>Archive hundreds of promotional emails instantly. Reclaim your inbox in seconds.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🛡️</div>
+                <div class="feature">
+                    <div class="icon">🛡️</div>
                     <h3>Phishing Detection</h3>
-                    <p>Identify suspicious emails with confidence scores and clear explanations.</p>
+                    <p>Identifies suspicious emails with clear explanations and confidence scores.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📊</div>
+                <div class="feature">
+                    <div class="icon">📊</div>
                     <h3>Inbox Analytics</h3>
                     <p>See your clutter score, phishing count, and organization stats at a glance.</p>
                 </div>
@@ -147,145 +112,123 @@
         </div>
     </section>
 
-    <!-- ===== PRICING ===== -->
+    <!-- PRICING -->
     <section class="pricing" id="pricing">
         <div class="container">
-            <div class="section-header">
-                <span class="section-tag">Pricing</span>
-                <h2>Simple, Transparent Pricing</h2>
-                <p>Start free, upgrade when you need more</p>
-            </div>
+            <div class="section-label">Pricing</div>
+            <h2 class="section-title">Simple, fair pricing</h2>
             <div class="pricing-grid">
-                <div class="pricing-card">
-                    <div class="pricing-header">
-                        <h3>Free</h3>
-                        <div class="price">₹0</div>
-                        <p>Perfect for getting started</p>
-                    </div>
+                <div class="plan">
+                    <h3>Free</h3>
+                    <div class="price">₹0</div>
+                    <p>For getting started</p>
                     <ul>
                         <li>✅ 5 scans per day</li>
                         <li>✅ 25 emails per scan</li>
-                        <li>✅ Smart Gmail labels</li>
+                        <li>✅ Smart labels</li>
                         <li>✅ Basic phishing detection</li>
-                        <li>✅ Gmail integration</li>
                     </ul>
-                    <a href="#" class="btn btn-outline">Get Started</a>
+                    <a href="#" class="btn outline">Get Started</a>
                 </div>
-                <div class="pricing-card premium">
-                    <div class="popular-badge">🌟 Most Popular</div>
-                    <div class="pricing-header">
-                        <h3>Premium</h3>
-                        <div class="price">₹99 <span>/ month</span></div>
-                        <p>For power users who want more</p>
-                    </div>
+                <div class="plan premium">
+                    <div class="pop">⭐ Most Popular</div>
+                    <h3>Premium</h3>
+                    <div class="price">₹99 <span>/mo</span></div>
+                    <p>For power users</p>
                     <ul>
                         <li>✅ Unlimited scans</li>
-                        <li>✅ Unlimited emails per scan</li>
-                        <li>✅ Bulk cleanup (500+ emails)</li>
+                        <li>✅ Unlimited emails</li>
+                        <li>✅ Bulk cleanup (500+)</li>
                         <li>✅ Deep AI explanations</li>
                         <li>✅ Advanced analytics</li>
-                        <li>✅ Priority support</li>
                     </ul>
-                    <a href="#" class="btn btn-primary">Upgrade Now</a>
+                    <a href="#" class="btn primary">Upgrade Now</a>
                 </div>
-                <div class="pricing-card">
-                    <div class="pricing-header">
-                        <h3>International</h3>
-                        <div class="price">$1.19 <span>/ month</span></div>
-                        <p>For users outside India</p>
-                    </div>
+                <div class="plan">
+                    <h3>International</h3>
+                    <div class="price">$1.19 <span>/mo</span></div>
+                    <p>For users outside India</p>
                     <ul>
-                        <li>✅ Unlimited scans</li>
-                        <li>✅ Unlimited emails per scan</li>
-                        <li>✅ Bulk cleanup (500+ emails)</li>
-                        <li>✅ Deep AI explanations</li>
-                        <li>✅ Advanced analytics</li>
+                        <li>✅ All Premium features</li>
                         <li>✅ Global payment support</li>
                     </ul>
-                    <a href="#" class="btn btn-outline">Upgrade Now</a>
+                    <a href="#" class="btn outline">Upgrade Now</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== FAQ ===== -->
+    <!-- FAQ -->
     <section class="faq" id="faq">
         <div class="container">
-            <div class="section-header">
-                <span class="section-tag">FAQ</span>
-                <h2>Frequently Asked Questions</h2>
-            </div>
+            <div class="section-label">FAQ</div>
+            <h2 class="section-title">Questions? We've got answers.</h2>
             <div class="faq-grid">
                 <div class="faq-item">
                     <h3>Is my data safe?</h3>
-                    <p>Yes! We never store your emails. Processing happens in real-time, and your Gmail token is used only to fetch and classify emails.</p>
+                    <p>Yes. We never store your emails. Processing happens in real-time. Your Gmail token is used only to fetch and classify emails.</p>
                 </div>
                 <div class="faq-item">
-                    <h3>What's the difference between Free and Premium?</h3>
-                    <p>Free tier gives you 5 scans/day. Premium gives unlimited scans, bulk cleanup, deep AI explanations, and advanced analytics.</p>
+                    <h3>What's the free tier?</h3>
+                    <p>5 scans per day with 25 emails per scan. Perfect to try it out. Upgrade to Premium for unlimited everything.</p>
                 </div>
                 <div class="faq-item">
-                    <h3>How do I install the extension?</h3>
-                    <p>Click the "Install Extension" button on this page. It will take you to the Chrome Web Store where you can add it to your browser.</p>
+                    <h3>How do I install?</h3>
+                    <p>Click "Add to Chrome" on this page. It takes you to the Chrome Web Store where you can add it in one click.</p>
                 </div>
                 <div class="faq-item">
-                    <h3>What payment methods do you accept?</h3>
-                    <p>We accept UPI (Google Pay, PhonePe, BHIM), credit/debit cards, and netbanking.</p>
+                    <h3>What payment methods?</h3>
+                    <p>UPI (Google Pay, PhonePe), credit/debit cards, and netbanking. International users can pay via card.</p>
                 </div>
                 <div class="faq-item">
-                    <h3>Can I cancel my subscription?</h3>
-                    <p>Yes, you can cancel anytime from your Razorpay dashboard or contact us for assistance.</p>
+                    <h3>Can I cancel?</h3>
+                    <p>Yes. Cancel anytime from your Razorpay dashboard. No questions asked.</p>
                 </div>
                 <div class="faq-item">
                     <h3>Is there a free trial?</h3>
-                    <p>Yes! The free tier gives you 5 scans/day forever. Upgrade to Premium whenever you need more.</p>
+                    <p>The free tier is your trial. Use it forever. Upgrade only if you need more scans.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== CTA ===== -->
+    <!-- CTA -->
     <section class="cta">
         <div class="container">
             <div class="cta-box">
-                <h2>Ready to Clean Your Inbox?</h2>
-                <p>Join 500+ users who already organized their Gmail with InboxAI.</p>
-                <a href="#" class="btn btn-primary btn-lg">🚀 Install Extension Now</a>
+                <h2>Ready to clean your inbox?</h2>
+                <p>Join 500+ users already using InboxAI.</p>
+                <a href="#" class="btn primary large">🚀 Add to Chrome — Free</a>
             </div>
         </div>
     </section>
 
-    <!-- ===== FOOTER ===== -->
-    <footer class="footer">
+    <!-- FOOTER -->
+    <footer>
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <span class="logo-icon">✦</span>
-                    <span class="logo-text">InboxAI</span>
-                    <p>Smart Gmail organizer powered by AI.</p>
+                    <span>✦</span> InboxAI
+                    <p>Smart Gmail organizer</p>
                 </div>
                 <div class="footer-links">
-                    <h4>Product</h4>
                     <a href="#features">Features</a>
                     <a href="#pricing">Pricing</a>
                     <a href="#faq">FAQ</a>
                 </div>
                 <div class="footer-links">
-                    <h4>Legal</h4>
                     <a href="privacy.html">Privacy Policy</a>
                     <a href="terms.html">Terms of Service</a>
                 </div>
                 <div class="footer-links">
-                    <h4>Contact</h4>
-                    <a href="mailto:yagnamurthy.nikhilesh@gmail.com">Email Us</a>
+                    <a href="mailto:yagnamurthy.nikhilesh@gmail.com">Contact</a>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 InboxAI. All rights reserved.</p>
+                © 2026 InboxAI. All rights reserved.
             </div>
         </div>
     </footer>
 
-    <script src="script.js"></script>
 </body>
 </html>
