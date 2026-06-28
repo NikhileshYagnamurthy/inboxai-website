@@ -1,399 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>InboxAI — Sort your Gmail, automatically</title>
-<meta name="description" content="InboxAI sorts your Gmail into smart labels, flags phishing, and clears the clutter — right inside your browser."/>
+<meta name="description" content="InboxAI sorts your Gmail into smart labels, flags phishing, and clears the clutter — right inside your browser." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-
-<style>
-  /* ============ TOKENS ============ */
-  :root{
-    --paper:      #FBF3E6;   /* warm ivory page background */
-    --paper-2:    #F2E2C9;   /* deeper kraft for cards/trays */
-    --paper-3:    #EAD5AE;   /* perforation / border tone */
-    --ink:        #2A1B12;   /* deep espresso — primary text & dark sections */
-    --ink-soft:   #5C4632;   /* secondary text on paper */
-    --cream-text: #F3E6D3;   /* text on dark sections */
-    --stamp-red:  #C1432E;   /* postal ink red — primary accent / CTA */
-    --stamp-red-d:#9F3322;
-    --postal-green:#3F6B4E;  /* sorted / clean accent */
-    --gold:       #D9A441;   /* premium / highlight accent */
-    --shadow: 0 1px 0 rgba(42,27,18,.06), 0 8px 24px rgba(42,27,18,.08);
-    --radius: 14px;
-  }
-
-  *,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
-  html{ scroll-behavior:smooth; }
-  body{
-    background:var(--paper);
-    color:var(--ink);
-    font-family:'Inter', system-ui, sans-serif;
-    line-height:1.55;
-    -webkit-font-smoothing:antialiased;
-  }
-  img,svg{ display:block; max-width:100%; }
-  a{ color:inherit; text-decoration:none; }
-  button{ font-family:inherit; border:none; background:none; cursor:pointer; }
-  ul{ list-style:none; }
-  .container{ max-width:1080px; margin:0 auto; padding:0 28px; }
-
-  h1,h2,h3,h4{
-    font-family:'Fraunces', serif;
-    font-weight:600;
-    letter-spacing:-0.01em;
-    color:var(--ink);
-  }
-  .eyebrow{
-    font-family:'Space Mono', monospace;
-    font-size:11.5px;
-    letter-spacing:.14em;
-    text-transform:uppercase;
-    color:var(--stamp-red);
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-  }
-  .eyebrow::before{
-    content:"";
-    width:6px; height:6px;
-    border-radius:50%;
-    background:var(--stamp-red);
-    display:inline-block;
-  }
-
-  :focus-visible{ outline:2.5px solid var(--stamp-red); outline-offset:3px; border-radius:4px; }
-
-  @media (prefers-reduced-motion: reduce){
-    *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important; }
-  }
-
-  /* ============ NAV ============ */
-  header.site-nav{
-    position:sticky; top:0; z-index:50;
-    background:rgba(251,243,230,.92);
-    backdrop-filter:blur(8px);
-    border-bottom:1px solid var(--paper-3);
-  }
-  .nav-row{
-    display:flex; align-items:center; justify-content:space-between;
-    padding:16px 28px;
-    max-width:1080px; margin:0 auto;
-  }
-  .brand{
-    display:flex; align-items:center; gap:9px;
-    font-family:'Fraunces', serif; font-weight:600; font-size:19px;
-  }
-  .brand .mark{
-    width:30px; height:30px; border-radius:50%;
-    background:var(--stamp-red); color:var(--cream-text);
-    display:flex; align-items:center; justify-content:center;
-    font-family:'Space Mono', monospace; font-size:13px; font-weight:700;
-    transform:rotate(-8deg);
-  }
-  nav.links{ display:flex; align-items:center; gap:28px; }
-  nav.links a.navlink{
-    font-size:14px; font-weight:500; color:var(--ink-soft);
-    padding:6px 2px; border-bottom:2px solid transparent;
-    transition:color .15s, border-color .15s;
-  }
-  nav.links a.navlink:hover, nav.links a.navlink.active{
-    color:var(--ink); border-color:var(--stamp-red);
-  }
-  .btn{
-    display:inline-flex; align-items:center; justify-content:center; gap:8px;
-    font-weight:600; font-size:14.5px;
-    padding:11px 22px; border-radius:999px;
-    transition:transform .12s, box-shadow .12s, background .15s;
-  }
-  .btn:active{ transform:scale(.97); }
-  .btn-primary{ background:var(--stamp-red); color:var(--cream-text); box-shadow:var(--shadow); }
-  .btn-primary:hover{ background:var(--stamp-red-d); }
-  .btn-ghost{ background:transparent; color:var(--ink); border:1.5px solid var(--paper-3); }
-  .btn-ghost:hover{ border-color:var(--ink-soft); }
-  .btn-sm{ padding:8px 16px; font-size:13.5px; }
-
-  /* ============ HERO ============ */
-  .hero{ padding:72px 0 40px; position:relative; overflow:hidden; }
-  .hero-grid{
-    display:grid; grid-template-columns:1.05fr .95fr; gap:48px; align-items:center;
-  }
-  .hero h1{ font-size:50px; line-height:1.05; margin:18px 0 18px; }
-  .hero h1 em{ font-style:italic; color:var(--stamp-red); }
-  .hero p.lede{ font-size:17px; color:var(--ink-soft); max-width:440px; margin-bottom:28px; }
-  .hero-ctas{ display:flex; gap:14px; flex-wrap:wrap; margin-bottom:22px; }
-  .trust-bits{ display:flex; gap:18px; flex-wrap:wrap; }
-  .trust-bit{
-    font-family:'Space Mono', monospace; font-size:11.5px; color:var(--ink-soft);
-    display:flex; align-items:center; gap:6px;
-  }
-  .trust-bit::before{ content:"✓"; color:var(--postal-green); font-weight:700; }
-
-  /* ---- signature element: sorting desk animation ---- */
-  .sorter{
-    position:relative; height:380px;
-    background:var(--paper-2);
-    border:1.5px solid var(--paper-3);
-    border-radius:var(--radius);
-    box-shadow:var(--shadow);
-    overflow:hidden;
-  }
-  .sorter::before{ /* subtle paper grain via repeating dots */
-    content:""; position:absolute; inset:0; opacity:.5;
-    background-image: radial-gradient(var(--paper-3) 1px, transparent 1px);
-    background-size:14px 14px;
-    pointer-events:none;
-  }
-  .chute{
-    position:absolute; top:0; left:50%; transform:translateX(-50%);
-    width:2px; height:120px; background:transparent;
-  }
-  .envelope{
-    position:absolute; left:50%; top:14px;
-    width:78px; height:50px;
-    background:var(--paper);
-    border:1.5px solid var(--ink-soft);
-    border-radius:4px;
-    transform:translateX(-50%);
-    box-shadow:0 3px 6px rgba(42,27,18,.12);
-    animation: drop 6s linear infinite;
-  }
-  .envelope::before{ /* envelope flap */
-    content:""; position:absolute; inset:0;
-    background:linear-gradient(135deg, transparent 49%, rgba(42,27,18,.08) 50%, transparent 51%),
-               linear-gradient(45deg, transparent 49%, rgba(42,27,18,.08) 50%, transparent 51%);
-  }
-  .stamp-mark{
-    position:absolute; top:5px; right:6px; width:18px; height:18px;
-    border-radius:50%; border:1.5px solid var(--stamp-red); color:var(--stamp-red);
-    font-family:'Space Mono',monospace; font-size:8px; font-weight:700;
-    display:flex; align-items:center; justify-content:center;
-    opacity:0; transform:scale(1.6) rotate(-15deg);
-    animation: stampin 6s linear infinite;
-  }
-  .e1{ animation-delay:0s; }
-  .e2{ animation-delay:1.5s; }
-  .e3{ animation-delay:3s; }
-  .e4{ animation-delay:4.5s; }
-  .e1 .stamp-mark, .e1{ --tx:-198px; }
-  .e2 .stamp-mark, .e2{ --tx:-66px; }
-  .e3 .stamp-mark, .e3{ --tx:66px; }
-  .e4 .stamp-mark, .e4{ --tx:198px; }
-
-  @keyframes drop{
-    0%   { top:14px;  transform:translateX(-50%) translateX(0) rotate(0deg); opacity:1; }
-    55%  { top:190px; transform:translateX(-50%) translateX(0) rotate(0deg); opacity:1; }
-    78%  { top:255px; transform:translateX(-50%) translateX(var(--tx)) rotate(6deg); opacity:1; }
-    92%  { top:270px; transform:translateX(-50%) translateX(var(--tx)) rotate(6deg); opacity:1; }
-    100% { top:270px; transform:translateX(-50%) translateX(var(--tx)) rotate(6deg); opacity:0; }
-  }
-  @keyframes stampin{
-    0%,58%{ opacity:0; transform:scale(1.6) rotate(-15deg); }
-    64%{ opacity:1; transform:scale(1) rotate(-15deg); }
-    90%{ opacity:1; transform:scale(1) rotate(-15deg); }
-    100%{ opacity:0; transform:scale(1) rotate(-15deg); }
-  }
-
-  .trays{
-    position:absolute; bottom:0; left:0; right:0;
-    display:grid; grid-template-columns:repeat(4,1fr);
-    border-top:2px dashed var(--paper-3);
-  }
-  .tray{
-    padding:10px 6px 14px;
-    text-align:center;
-    border-right:1px dashed var(--paper-3);
-  }
-  .tray:last-child{ border-right:none; }
-  .tray .label{
-    font-family:'Space Mono', monospace; font-size:10px; font-weight:700;
-    letter-spacing:.04em; text-transform:uppercase;
-  }
-  .tray.promo .label{ color:var(--stamp-red); }
-  .tray.news .label{ color:var(--gold); }
-  .tray.sec .label{ color:var(--ink-soft); }
-  .tray.fin .label{ color:var(--postal-green); }
-
-  /* ============ FEATURES ============ */
-  .section{ padding:90px 0; }
-  .section-head{ max-width:560px; margin-bottom:48px; }
-  .section-head h2{ font-size:34px; margin-top:14px; }
-  .section-head p{ color:var(--ink-soft); margin-top:12px; font-size:15.5px; }
-
-  .feature-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:22px; }
-  .feature-card{
-    background:var(--paper);
-    border:1.5px solid var(--paper-3);
-    border-radius:var(--radius);
-    padding:26px 24px;
-    transition:transform .15s, box-shadow .15s;
-  }
-  .feature-card:hover{ transform:translateY(-3px); box-shadow:var(--shadow); }
-  .postmark{
-    width:46px; height:46px; border-radius:50%;
-    border:2px solid var(--ink); position:relative;
-    display:flex; align-items:center; justify-content:center;
-    margin-bottom:16px; font-size:18px;
-  }
-  .postmark::after{
-    content:""; position:absolute; inset:-6px;
-    border:1px dashed var(--paper-3); border-radius:50%;
-  }
-  .feature-card h3{ font-size:18px; margin-bottom:8px; }
-  .feature-card p{ font-size:14px; color:var(--ink-soft); }
-
-  /* ============ HOW IT WORKS (dark section) ============ */
-  .how{ background:var(--ink); color:var(--cream-text); }
-  .how .section-head p{ color:#C9B59E; }
-  .how .eyebrow{ color:var(--gold); }
-  .how .eyebrow::before{ background:var(--gold); }
-  .steps{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; counter-reset:step; }
-  .step{ position:relative; padding-left:0; }
-  .step .num{
-    font-family:'Space Mono', monospace; font-weight:700; font-size:13px;
-    color:var(--ink); background:var(--gold);
-    width:34px; height:34px; border-radius:50%;
-    display:flex; align-items:center; justify-content:center;
-    margin-bottom:16px;
-  }
-  .step h3{ color:var(--cream-text); font-size:17px; margin-bottom:8px; }
-  .step p{ color:#C9B59E; font-size:14px; }
-
-  /* ============ PRICING (stamp cards) ============ */
-  .pricing-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
-  .stamp-card{
-    position:relative;
-    background:var(--paper);
-    border:1.5px solid var(--ink-soft);
-    border-radius:6px;
-    padding:30px 24px 26px;
-    --notch: 14px;
-    -webkit-mask-image: radial-gradient(circle var(--notch) at 0 0, transparent 0, transparent var(--notch), black calc(var(--notch) + 1px));
-  }
-  /* perforated edge using repeating radial gradients (top & bottom) */
-  .stamp-card{
-    background-image:
-      radial-gradient(circle 6px at 14px 0, var(--paper) 6px, transparent 6.5px),
-      repeating-radial-gradient(circle 6px at 14px 0, var(--paper) 0 6px, transparent 6.5px 28px);
-  }
-  .stamp-card.popular{ border-color:var(--stamp-red); box-shadow:var(--shadow); }
-  .stamp-card .pop-flag{
-    position:absolute; top:-13px; right:20px;
-    background:var(--stamp-red); color:var(--cream-text);
-    font-family:'Space Mono', monospace; font-size:10.5px; font-weight:700;
-    letter-spacing:.04em; text-transform:uppercase;
-    padding:5px 10px; border-radius:4px;
-  }
-  .tier-name{ font-family:'Space Mono', monospace; font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-soft); }
-  .tier-price{ font-family:'Fraunces', serif; font-size:38px; font-weight:600; margin:8px 0 2px; }
-  .tier-price span{ font-size:14px; font-weight:500; color:var(--ink-soft); font-family:'Inter',sans-serif; }
-  .tier-sub{ font-size:13px; color:var(--ink-soft); margin-bottom:20px; }
-  .tier-list{ display:flex; flex-direction:column; gap:9px; margin-bottom:24px; }
-  .tier-list li{ font-size:13.5px; display:flex; gap:8px; align-items:flex-start; }
-  .tier-list li::before{ content:"✦"; color:var(--stamp-red); font-size:11px; margin-top:2px; }
-
-  /* ============ FAQ ============ */
-  .faq-item{ border-bottom:1px solid var(--paper-3); }
-  .faq-q{
-    width:100%; text-align:left;
-    display:flex; align-items:center; justify-content:space-between;
-    padding:20px 2px; font-weight:600; font-size:15.5px; color:var(--ink);
-  }
-  .faq-q .plus{ font-family:'Space Mono', monospace; font-size:18px; color:var(--stamp-red); transition:transform .2s; }
-  .faq-item.open .plus{ transform:rotate(45deg); }
-  .faq-a{ max-height:0; overflow:hidden; transition:max-height .25s ease; }
-  .faq-a p{ padding:0 2px 20px; color:var(--ink-soft); font-size:14.5px; max-width:620px; }
-
-  /* ============ CTA BANNER ============ */
-  .cta-band{
-    background:var(--postal-green); color:var(--cream-text);
-    border-radius:18px; padding:54px 48px;
-    display:flex; align-items:center; justify-content:space-between; gap:28px; flex-wrap:wrap;
-    margin-bottom:90px;
-  }
-  .cta-band h2{ color:var(--cream-text); font-size:28px; max-width:420px; }
-  .cta-band .btn-primary{ background:var(--gold); color:var(--ink); }
-  .cta-band .btn-primary:hover{ background:#c98f33; }
-
-  /* ============ FOOTER ============ */
-  footer{ background:var(--ink); color:#C9B59E; padding:50px 0 30px; }
-  .footer-row{ display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:24px; }
-  footer .brand{ color:var(--cream-text); }
-  footer nav.links a{ color:#C9B59E; font-size:13.5px; }
-  footer nav.links a:hover{ color:var(--cream-text); }
-  .footer-bottom{ margin-top:36px; font-size:12.5px; color:#9C8770; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; }
-
-  /* ============ LEGAL PAGES ============ */
-  .view{ display:none; }
-  .view.active{ display:block; }
-  .legal{ padding:64px 0 90px; max-width:680px; }
-  .legal .back{ font-family:'Space Mono',monospace; font-size:12.5px; color:var(--stamp-red); display:inline-flex; gap:6px; margin-bottom:26px; }
-  .legal h1{ font-size:32px; margin-bottom:6px; }
-  .legal .updated{ font-family:'Space Mono',monospace; font-size:12px; color:var(--ink-soft); margin-bottom:34px; display:block; }
-  .legal h2{ font-size:18px; margin:30px 0 10px; }
-  .legal p, .legal li{ font-size:14.5px; color:var(--ink-soft); margin-bottom:8px; }
-  .legal ul{ padding-left:0; margin-bottom:14px; }
-  .legal li{ padding-left:18px; position:relative; }
-  .legal li::before{ content:"—"; position:absolute; left:0; color:var(--stamp-red); }
-  .legal a{ color:var(--stamp-red); text-decoration:underline; }
-  .legal strong{ color:var(--ink); }
-
-  /* ============ FEEDBACK BUTTON ============ */
-  .feedback-fab{
-    position:fixed; bottom:24px; right:24px; z-index:60;
-    display:inline-flex; align-items:center; gap:9px;
-    background:var(--ink); color:var(--cream-text);
-    padding:13px 20px 13px 16px;
-    border-radius:999px;
-    box-shadow:0 6px 18px rgba(42,27,18,.28);
-    font-weight:600; font-size:13.5px;
-    transition:transform .15s, box-shadow .15s, background .15s;
-  }
-  .feedback-fab:hover{ transform:translateY(-2px); box-shadow:0 10px 22px rgba(42,27,18,.32); background:var(--stamp-red-d); }
-  .feedback-fab:active{ transform:translateY(0) scale(.97); }
-  .feedback-fab .seal{
-    width:22px; height:22px; border-radius:50%;
-    background:var(--stamp-red); color:var(--cream-text);
-    display:flex; align-items:center; justify-content:center;
-    font-size:12px; transform:rotate(-10deg); flex-shrink:0;
-  }
-  @media (max-width:600px){
-    .feedback-fab span.fab-label{ display:none; }
-    .feedback-fab{ padding:13px; }
-  }
-
-  /* ============ RESPONSIVE ============ */
-  @media (max-width:880px){
-    .hero-grid{ grid-template-columns:1fr; }
-    .hero h1{ font-size:38px; }
-    .feature-grid, .pricing-grid, .steps{ grid-template-columns:1fr; }
-    .nav-row nav.links{ display:none; }
-    .cta-band{ flex-direction:column; text-align:center; }
-  }
-</style>
+<link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-<!-- ============ NAV ============ -->
-<header class="site-nav">
-  <div class="nav-row">
-    <a href="#" class="brand" data-view="home"><span class="mark">✦</span> InboxAI</a>
-    <nav class="links">
-      <a href="#" class="navlink active" data-view="home">Home</a>
-      <a href="#" class="navlink" data-view="privacy">Privacy</a>
-      <a href="#" class="navlink" data-view="terms">Terms</a>
-      <a href="#" class="btn btn-primary btn-sm" id="navGetStarted">Get the extension</a>
-    </nav>
+<nav class="navbar">
+  <div class="container">
+    <a href="index.html" class="nav-brand"><span class="logo-icon">✦</span><span class="logo-text">InboxAI</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="privacy.html">Privacy</a></li>
+      <li><a href="terms.html">Terms</a></li>
+      <li><a href="#" class="btn btn-primary btn-sm" id="navGetStarted">Get the extension</a></li>
+    </ul>
   </div>
-</header>
+</nav>
 
 <main>
-
-<!-- ============ HOME ============ -->
-<div class="view active" id="view-home">
 
   <!-- HERO -->
   <section class="hero">
@@ -404,7 +35,7 @@
         <p class="lede">InboxAI reads the signals your inbox already gives off — senders, headers, language — and routes every email into the right pile before you even open Gmail.</p>
         <div class="hero-ctas">
           <a href="#" class="btn btn-primary" id="heroGetStarted">Get the extension — it's free</a>
-          <a href="#" class="btn btn-ghost" data-view="home" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'});return false;">See how it sorts ↓</a>
+          <a href="#features" class="btn btn-ghost">See how it sorts ↓</a>
         </div>
         <div class="trust-bits">
           <span class="trust-bit">No email content stored</span>
@@ -582,135 +213,26 @@
     </div>
   </section>
 
-</div>
-
-<!-- ============ PRIVACY ============ -->
-<div class="view" id="view-privacy">
-  <div class="container legal">
-    <a href="#" class="back" data-view="home">← Back to home</a>
-    <h1>Privacy Policy</h1>
-    <span class="updated">Last updated: June 2026</span>
-
-    <p>InboxAI ("we", "our", "us") is a Chrome extension that helps you organize Gmail. This policy explains exactly what we collect, why, and where it goes — written to match what the extension actually does, not a generic template.</p>
-
-    <h2>1. What we collect</h2>
-    <ul>
-      <li><strong>Your Gmail address</strong> — used to identify your account and track your scan usage and subscription status.</li>
-      <li><strong>A Google authorization token</strong> — generated when you sign in, used only to read and label your Gmail on your behalf. It is stored in our database so you don't need to sign in again on every scan.</li>
-      <li><strong>Email metadata, only during a scan</strong> — subject line, sender address, a short preview snippet, and two headers (List-Unsubscribe, Precedence). This is used in memory to classify each email and is not saved to our database.</li>
-      <li><strong>Basic account/usage data</strong> — how many scans you've used today, and whether your account is on a free or premium plan.</li>
-      <li><strong>Payment confirmation</strong> — when you upgrade, your email address is passed to our payment processor (Razorpay) to associate the payment with your account. We do not see or store your card or UPI details — Razorpay handles that directly.</li>
-    </ul>
-    <p>We do not read, store, or retain the full content or body of your emails at any point.</p>
-
-    <h2>2. How we use it</h2>
-    <ul>
-      <li>To classify emails into labels (Promotions, Newsletters, Security, Finance, and so on) when you run a scan.</li>
-      <li>To apply or remove Gmail labels and archive emails you choose to clean up.</li>
-      <li>To enforce free-tier scan limits and track premium status.</li>
-      <li>If you're on Premium and request an AI explanation for a flagged email, the subject, sender, and preview snippet for that one email are sent to OpenAI to generate the explanation. This only happens when you explicitly ask for it.</li>
-    </ul>
-
-    <h2>3. Who we share data with</h2>
-    <ul>
-      <li><strong>Google</strong> — for sign-in and to access your Gmail via the Gmail API.</li>
-      <li><strong>Supabase</strong> — our database provider, where your email address, authorization token, and account/usage status are stored.</li>
-      <li><strong>Razorpay</strong> — our payment processor, for handling subscription payments.</li>
-      <li><strong>OpenAI</strong> — only for Premium users who request an AI explanation of a specific flagged email, and only for that email's metadata.</li>
-    </ul>
-    <p>We do not sell your data, and we do not share it with advertisers or any party not listed above.</p>
-
-    <h2>4. Data security</h2>
-    <ul>
-      <li>All traffic between the extension and our server is sent over HTTPS.</li>
-      <li>Your authorization token is stored in our database, which is encrypted at rest by our hosting provider.</li>
-      <li>Access to the database is restricted to our backend service — it is not publicly readable.</li>
-    </ul>
-
-    <h2>5. Your rights</h2>
-    <ul>
-      <li>You can revoke InboxAI's access to your Gmail at any time from your <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener">Google Account permissions page</a>.</li>
-      <li>You can request deletion of your account data — including your authorization token and usage history — by emailing us below.</li>
-    </ul>
-
-    <h2>6. Changes to this policy</h2>
-    <p>If this policy changes in a way that affects what we collect or how we use it, we'll update the date at the top of this page.</p>
-
-    <h2>7. Contact</h2>
-    <p>Email: <a href="mailto:yagnamurthynikhilesh@gmail.com">yagnamurthynikhilesh@gmail.com</a></p>
-  </div>
-</div>
-
-<!-- ============ TERMS ============ -->
-<div class="view" id="view-terms">
-  <div class="container legal">
-    <a href="#" class="back" data-view="home">← Back to home</a>
-    <h1>Terms of Service</h1>
-    <span class="updated">Last updated: June 2026</span>
-
-    <p>By installing or using InboxAI, you agree to these terms. If you don't agree, please don't use the extension.</p>
-
-    <h2>1. What InboxAI does</h2>
-    <p>InboxAI connects to your Gmail account (with your permission) to classify, label, and optionally archive emails based on automated rules. It does not send emails, delete anything permanently, or take any action you haven't triggered yourself by clicking Scan or Clean up.</p>
-
-    <h2>2. Free vs. Premium</h2>
-    <ul>
-      <li><strong>Free:</strong> 5 scans per day, up to 50 emails per scan, smart labels, basic phishing detection.</li>
-      <li><strong>Premium:</strong> Unlimited scans, up to 200 emails per scan, bulk cleanup of 500+ emails at once, AI-generated explanations for flagged emails, advanced analytics.</li>
-    </ul>
-
-    <h2>3. Payments and refunds</h2>
-    <ul>
-      <li>Premium is billed monthly through Razorpay, in INR (₹99/mo) or USD ($1.19/mo) for international users.</li>
-      <li>Payments are non-refundable once processed. You can stop paying at any time by not renewing; there's no lock-in contract.</li>
-      <li>We may change prices in the future. If we do, we'll display the new price before you pay — your existing billing period won't change retroactively.</li>
-    </ul>
-
-    <h2>4. Your responsibilities</h2>
-    <ul>
-      <li>You're responsible for keeping your own Google account secure.</li>
-      <li>You won't use InboxAI to access, label, or archive email on an account that isn't yours without permission.</li>
-      <li>You won't attempt to abuse, overload, or reverse-engineer the service in a way that disrupts it for other users.</li>
-    </ul>
-
-    <h2>5. Automated classification isn't perfect</h2>
-    <p>InboxAI's phishing and category detection is automated and rule-based. It can occasionally mislabel an email or miss something it should have flagged. Don't rely on it as your only safeguard against phishing — use your own judgment, especially for anything involving money or credentials.</p>
-
-    <h2>6. Termination</h2>
-    <p>We may suspend or terminate access for accounts that violate these terms, abuse the service, or attempt to circumvent scan limits. You can stop using InboxAI at any time by uninstalling the extension and revoking access from your Google Account.</p>
-
-    <h2>7. Changes to these terms</h2>
-    <p>We may update these terms occasionally. Continuing to use InboxAI after a change means you accept the updated terms.</p>
-
-    <h2>8. Contact</h2>
-    <p>Email: <a href="mailto:yagnamurthynikhilesh@gmail.com">yagnamurthynikhilesh@gmail.com</a></p>
-  </div>
-</div>
-
 </main>
 
-<!-- ============ FOOTER ============ -->
-<footer>
+<footer class="footer">
   <div class="container">
-    <div class="footer-row">
-      <div>
-        <a href="#" class="brand" data-view="home"><span class="mark">✦</span> InboxAI</a>
-      </div>
-      <nav class="links" style="display:flex;gap:22px;">
-        <a href="#" data-view="home">Home</a>
-        <a href="#" data-view="privacy">Privacy</a>
-        <a href="#" data-view="terms">Terms</a>
+    <div class="footer-top">
+      <a href="index.html" class="nav-brand"><span class="logo-icon">✦</span><span class="logo-text">InboxAI</span></a>
+      <nav class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
         <a href="mailto:yagnamurthynikhilesh@gmail.com">Contact</a>
       </nav>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 InboxAI. All rights reserved.</span>
+      <span>&copy; 2026 InboxAI. All rights reserved.</span>
       <span>Made for inboxes that get out of hand.</span>
     </div>
   </div>
 </footer>
 
-<!-- ============ FEEDBACK ============ -->
 <a class="feedback-fab"
    href="mailto:yagnamurthynikhilesh@gmail.com?subject=InboxAI%20feedback&body=Hey%20Nikhilesh%2C%0A%0AHere's%20my%20feedback%20on%20InboxAI%3A%0A%0A"
    aria-label="Send feedback by email">
@@ -722,32 +244,10 @@
   // Single place to update once the Chrome Web Store listing is live.
   const CHROME_STORE_URL = "#"; // TODO: replace with your real Chrome Web Store URL
   document.querySelectorAll(
-    "#navGetStarted, #heroGetStarted, #freeGetStarted, #bandGetStarted"
+    "#navGetStarted, #heroGetStarted, #freeGetStarted, #bandGetStarted, #premiumUpgrade, #intlUpgrade"
   ).forEach(el => el.setAttribute("href", CHROME_STORE_URL));
 
-  // Premium/International buttons could point straight at your /pay flow
-  // once the extension is installed; for now they also route to the store.
-  document.querySelectorAll("#premiumUpgrade, #intlUpgrade").forEach(el =>
-    el.setAttribute("href", CHROME_STORE_URL)
-  );
-
-  // ---- view switching (Home / Privacy / Terms) ----
-  function showView(name){
-    document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
-    document.getElementById("view-" + name).classList.add("active");
-    document.querySelectorAll("[data-view]").forEach(el => {
-      if (el.classList.contains("navlink")) el.classList.toggle("active", el.dataset.view === name);
-    });
-    window.scrollTo({ top: 0, behavior: "instant" });
-  }
-  document.querySelectorAll("[data-view]").forEach(el => {
-    el.addEventListener("click", e => {
-      e.preventDefault();
-      showView(el.dataset.view);
-    });
-  });
-
-  // ---- FAQ accordion ----
+  // FAQ accordion
   document.querySelectorAll(".faq-item").forEach(item => {
     const q = item.querySelector(".faq-q");
     const a = item.querySelector(".faq-a");
